@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TempusVelit.Assets"
              mc:Ignorable="d"
-             d:DesignHeight="1024"
+             d:DesignHeight="800"
              d:DesignWidth="1440">
     <Grid VerticalAlignment="Stretch"
           HorizontalAlignment="Left"
@@ -13,19 +13,19 @@
           SnapsToDevicePixels="True"
           x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="85" />
+            <RowDefinition Height="65" />
         </Grid.RowDefinitions>
         
         <Border Grid.Row="0"
                 Background="{StaticResource LightBaseColor}"
                 BorderThickness="0"
-                CornerRadius="0, 35, 35, 0">
+                CornerRadius="0, 35, 0, 0">
             <Border Background="Transparent"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
@@ -39,75 +39,75 @@
             </Border>
         </Border>
         <Border Grid.Row="1"
-                Height="100"
-                CornerRadius="0, 35, 35, 0"
+                Height="80"
+                CornerRadius="0, 0, 35, 0"
                 BorderThickness="0"
                 Background="{StaticResource LightBaseColor}"
                 MouseLeftButtonDown="GoToProfile">
             <Border x:Name="ProfileBorder"
-                    Background="{StaticResource WhiteBaseColor}"
                     BorderThickness="0"
                     CornerRadius="50, 0, 0, 50">
                 <StackPanel Orientation="Horizontal">
-                    <Ellipse Height="35"
-                             Width="35"
+                    <Ellipse Height="30"
+                             Width="30"
                              Margin="30, 0, 0, 0"
                              Fill="{StaticResource NormalBaseColor}" />
                     <Label Content="Профиль"
                            VerticalAlignment="Center"
-                           Margin="25, 0, 0, 0"
-                           FontSize="30"
+                           Margin="15, 0, 0, 0"
+                           FontSize="25"
                            FontFamily="{StaticResource YsabeauInfant-Regular}"
                            Visibility="{Binding IsHidden}" />
                 </StackPanel>
             </Border>
         </Border>
         <Border Grid.Row="2"
-                Height="90"
-                CornerRadius="0, 35, 0, 0"
+                Height="80"
+                CornerRadius="0, 0, 0, 0"
                 Background="{StaticResource LightBaseColor}"
                 MouseLeftButtonDown="GoToLearningModules">
             <Border x:Name="LearningBorder"
                     BorderThickness="0"
+                    Background="{StaticResource WhiteBaseColor}"
                     CornerRadius="50, 0, 0, 50">
                 <StackPanel Orientation="Horizontal">
-                    <Ellipse Height="35"
-                             Width="35"
+                    <Ellipse Height="30"
+                             Width="30"
                              Margin="30, 0, 0, 0"
                              Fill="{StaticResource NormalBaseColor}" />
                     <Label Content="Обучающие модули"
                            VerticalAlignment="Center"
-                           Margin="25, 0, 0, 0"
-                           FontSize="30"
+                           Margin="15, 0, 0, 0"
+                           FontSize="25"
                            FontFamily="{StaticResource YsabeauInfant-Regular}"
                            Visibility="{Binding IsHidden}" />
                 </StackPanel>
             </Border>
         </Border>
         <Border Grid.Row="3"
-                Height="90"
-                CornerRadius="0, 0, 0, 0"
+                Height="80"
+                CornerRadius="0, 35, 0, 0"
                 Background="{StaticResource LightBaseColor}"
                 MouseLeftButtonDown="GoToControlRoom">
             <Border x:Name="ControlBorder"
                     BorderThickness="0"
                     CornerRadius="50, 0, 0, 50">
                 <StackPanel Orientation="Horizontal">
-                    <Ellipse Height="35"
-                             Width="35"
+                    <Ellipse Height="30"
+                             Width="30"
                              Margin="30, 0, 0, 0"
                              Fill="{StaticResource NormalBaseColor}" />
                     <Label Content="Контрольная комната"
                            VerticalAlignment="Center"
-                           Margin="25, 0, 0, 0"
-                           FontSize="30"
+                           Margin="15, 0, 0, 0"
+                           FontSize="25"
                            FontFamily="{StaticResource YsabeauInfant-Regular}"
                            Visibility="{Binding IsHidden}" />
                 </StackPanel>
             </Border>
         </Border>
         <Border Grid.Row="4"
-                Height="90"
+                Height="80"
                 CornerRadius="0, 0, 0, 0"
                 Background="{StaticResource LightBaseColor}"
                 MouseLeftButtonDown="GoToAchievementRoom">
@@ -115,14 +115,14 @@
                     BorderThickness="0"
                     CornerRadius="50, 0, 0, 50">
                 <StackPanel Orientation="Horizontal">
-                    <Ellipse Height="35"
-                             Width="35"
+                    <Ellipse Height="30"
+                             Width="30"
                              Margin="30, 0, 0, 0"
                              Fill="{StaticResource NormalBaseColor}" />
                     <Label Content="Достижения"
                            VerticalAlignment="Center"
-                           Margin="25, 0, 0, 0"
-                           FontSize="30"
+                           Margin="15, 0, 0, 0"
+                           FontSize="25"
                            FontFamily="{StaticResource YsabeauInfant-Regular}"
                            Visibility="{Binding IsHidden}" />
                 </StackPanel>
@@ -135,8 +135,9 @@
                 Background="{StaticResource LightBaseColor}">
             <Label Content="TEMPUS VELIT"
                    HorizontalContentAlignment="Center"
-                   Padding="0, 0, 0, 25"
-                   FontSize="40"
+                   Padding="0, 0, 0, 15"
+                   Foreground="{StaticResource DarkBaseColor}"
+                   FontSize="35"
                    FontFamily="{StaticResource Jost-SemiBold}"
                    Visibility="{Binding IsHidden}" />
         </Border>

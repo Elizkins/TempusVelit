@@ -12,28 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TempusVelit.Assets;
 using TempusVelit.Database;
-using TempusVelit.Properties;
 
 namespace TempusVelit.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Profile.xaml
+    /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class Profile : Page
+    public partial class MainPage : Page
     {
-        public Profile()
+
+        public static User User { get; set; }
+
+        public MainPage(User user)
         {
             InitializeComponent();
-        }
 
-        private void GoOut(object sender, MouseButtonEventArgs e)
-        {
-            Settings.Default.Email = null;
-            Settings.Default.Password = null;
-            Settings.Default.Save();
-            MainNavigationWindow.MainNavigationService.Navigate(new LogInPage());
+            User = user;
+
+            navigationFrame.NavigationService.Navigate(new LearningModules());
+
+            MenuControl.NavigationService = navigationFrame.NavigationService;
         }
     }
-
 }

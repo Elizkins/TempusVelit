@@ -13,16 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TempusVelit
+namespace TempusVelit.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для SingInPage.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class SingInPage : Page
     {
-        public MainWindow()
+        public SingInPage()
         {
             InitializeComponent();
+        }
+
+        private void OpenLogInPage(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new LogInPage());
+        }
+
+        private void CreateAccount(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }

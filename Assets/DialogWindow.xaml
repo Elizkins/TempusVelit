@@ -1,0 +1,58 @@
+﻿<Window x:Class="TempusVelit.Assets.DialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TempusVelit"
+        Height="200"
+        Width="450"
+        ShowActivated="False"
+        Icon="/Resources/dialogIcon.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="40, 20, 60, 40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="{Binding HeadLine}"
+                   TextWrapping="Wrap"
+                   FontFamily="{StaticResource YsabeauInfant-Medium}"
+                   FontSize="25"
+                   Foreground="{StaticResource DarkBaseColor}" />
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="{Binding BackText}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="{StaticResource NormalBaseColor}"
+                    FontFamily="{StaticResource YsabeauInfant-Regular}"
+                    Click="BackButton"
+                    FontSize="21" />
+            <Button Content="{Binding OkText}"
+                    Margin="30, 0, 0, 0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="OKButton"
+                    Foreground="{StaticResource NormalBaseColor}"
+                    FontFamily="{StaticResource YsabeauInfant-Regular}"
+                    FontSize="21" />
+        </StackPanel>
+    </Grid>
+</Window>

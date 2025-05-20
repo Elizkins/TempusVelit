@@ -1,0 +1,160 @@
+﻿<Page x:Class="TempusVelit.Pages.LogInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TempusVelit.Pages"
+      xmlns:assets="clr-namespace:TempusVelit.Assets"
+      mc:Ignorable="d"
+      d:DesignHeight="1024"
+      d:DesignWidth="1440"
+      Background="{StaticResource LightBaseColor}">
+    <Border Background="{StaticResource WhiteBaseColor}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Height="700"
+            Width="630"
+            CornerRadius="16">
+        <StackPanel Margin="65, 75, 65, 35">
+            <TextBlock Text="Добро пожаловать"
+                       Foreground="{StaticResource BlackBaseColor}"
+                       FontSize="48"
+                       FontFamily="{StaticResource YsabeauInfant-Medium}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="0, 0, 0, 45" />
+            <assets:TextBoxWithPlaceholder x:Name="emailEntry"
+                                           Text=""
+                                           Color="{StaticResource NormalBaseColor}"
+                                           Placeholder="Почта"
+                                           Icon="M21.1369 18.7698C20.585 17.4788 19.7842 16.306 18.7789 15.317C17.7768 14.325 16.5896 13.5342 15.283 12.9881C15.2712 12.9823 15.2595 12.9794 15.2478 12.9736C17.0704 11.6734 18.2553 9.5554 18.2553 7.16583C18.2553 3.20729 15.008 0 11 0C6.99205 0 3.74473 3.20729 3.74473 7.16583C3.74473 9.5554 4.92956 11.6734 6.75216 12.9765C6.74045 12.9823 6.72875 12.9852 6.71705 12.991C5.40642 13.5371 4.23036 14.3201 3.22106 15.3198C2.21676 16.3097 1.41603 17.4822 0.863099 18.7727C0.319897 20.0362 0.026935 21.3907 7.31554e-05 22.7631C-0.000707679 22.7939 0.00476896 22.8246 0.0161805 22.8533C0.0275921 22.882 0.0447076 22.9082 0.0665186 22.9303C0.0883295 22.9523 0.114395 22.9699 0.143178 22.9819C0.171961 22.9938 0.202881 23 0.234114 23H1.98942C2.11814 23 2.22054 22.8989 2.22346 22.7746C2.28197 20.544 3.18888 18.4549 4.79206 16.8715C6.45083 15.2332 8.65374 14.3317 11 14.3317C13.3463 14.3317 15.5492 15.2332 17.2079 16.8715C18.8111 18.4549 19.718 20.544 19.7765 22.7746C19.7795 22.9018 19.8819 23 20.0106 23H21.7659C21.7971 23 21.828 22.9938 21.8568 22.9819C21.8856 22.9699 21.9117 22.9523 21.9335 22.9303C21.9553 22.9082 21.9724 22.882 21.9838 22.8533C21.9952 22.8246 22.0007 22.7939 21.9999 22.7631C21.9707 21.3819 21.681 20.0383 21.1369 18.7698V18.7698ZM11 12.1357C9.65719 12.1357 8.39337 11.6185 7.44258 10.6794C6.49179 9.74033 5.96812 8.49209 5.96812 7.16583C5.96812 5.83957 6.49179 4.59133 7.44258 3.65226C8.39337 2.71319 9.65719 2.19598 11 2.19598C12.3428 2.19598 13.6066 2.71319 14.5574 3.65226C15.5082 4.59133 16.0319 5.83957 16.0319 7.16583C16.0319 8.49209 15.5082 9.74033 14.5574 10.6794C13.6066 11.6185 12.3428 12.1357 11 12.1357Z">
+            </assets:TextBoxWithPlaceholder>
+            <Grid Margin="0, 30, 0, 60">
+                <assets:TextBoxWithPlaceholder x:Name="passwordEntry"
+                                               Text=""
+                                               Color="{StaticResource NormalBaseColor}"
+                                               Placeholder="Пароль"
+                                               Icon="M7.88309 11.9889C6.17658 12.0851 4.62787 12.6549 3.7491 14.6848C3.64914 14.9163 3.40882 15.0569 3.12851 15.0569C2.65594 15.0569 1.19486 14.0252 0.778442 13.7761C0.778868 16.8467 2.39223 19.5455 6.22337 19.5455C9.45008 19.5455 11.6679 17.9135 11.6679 15.064C11.6679 14.948 11.6402 14.8373 11.6266 14.7236L7.88309 11.9889ZM20.2553 0.45459C19.6105 0.45459 19.006 0.704785 18.545 1.06796C9.85034 7.87655 8.94562 8.03651 8.94562 10.0407C8.94562 10.5515 9.08386 11.0385 9.31695 11.4837L12.0315 13.4666C12.3382 13.5337 12.6543 13.5796 12.9839 13.5796C15.6258 13.5796 17.157 11.8842 21.9656 4.01698C22.2795 3.48192 22.5569 2.90397 22.5569 2.30216C22.5569 1.22419 21.451 0.45459 20.2553 0.45459Z" />
+                <!--<PasswordBox Name="passwordBox"
+                             Foreground="{StaticResource DarkBaseColor}"
+                             Visibility="Visible"
+                             Background="Transparent"
+                             Margin="60, 0"
+                             BorderThickness="0"
+                             FontSize="20"
+                             FontFamily="{StaticResource YsabeauInfant-Medium}"
+                             VerticalContentAlignment="Center"
+                             LostFocus="AddNumberAndPasswordText"
+                             GotFocus="RemovePasswordText" />
+                <Border Background="Transparent"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0, 0, 20, 0"
+                        PreviewMouseLeftButtonDown="OpenPassword">
+                    <Path x:Name="eye"
+                          Fill="{StaticResource DarkBaseColor}"
+                          Data="M13.9996 0C17.009 0 19.7038 1.43645 21.8131 3.0752C23.671 4.51864 25.174 6.19614 26.1686 7.43848L26.5631 7.94238L26.5641 7.94336C27.4989 9.16612 27.5002 10.8351 26.5641 12.0576H26.5631C25.5961 13.3199 23.9364 15.2752 21.8131 16.9248C19.7038 18.5635 17.009 20 13.9996 20C10.9905 19.9999 8.29631 18.5634 6.18713 16.9248C4.06375 15.2751 2.40312 13.3199 1.43616 12.0576L1.43713 12.0566C0.981945 11.4675 0.734009 10.7447 0.734009 10C0.734009 9.25507 0.981644 8.53163 1.43713 7.94238H1.43616C2.40312 6.68009 4.06375 4.72492 6.18713 3.0752C8.29631 1.43657 10.9905 0.000121101 13.9996 0ZM16.4996 10C16.4996 8.61929 15.3803 7.5 13.9996 7.5C12.6191 7.50021 11.4996 8.61941 11.4996 10C11.4996 11.3806 12.6191 12.4998 13.9996 12.5C15.3803 12.5 16.4996 11.3807 16.4996 10ZM3.23401 10C3.23401 10.1442 3.26971 10.2855 3.33752 10.4111L3.41565 10.5303L3.42151 10.5371L3.78674 11.0039C4.7043 12.1494 6.06785 13.6663 7.72034 14.9502C9.62311 16.4285 11.7817 17.4999 13.9996 17.5C16.2176 17.5 18.3761 16.4285 20.2789 14.9502C22.1677 13.4827 23.6794 11.7111 24.5787 10.5371L24.6608 10.4111C24.824 10.108 24.7966 9.74812 24.5778 9.46191V9.46094C23.6783 8.28697 22.1668 6.51658 20.2789 5.0498C18.3761 3.57145 16.2176 2.5 13.9996 2.5C11.7817 2.50012 9.62311 3.57148 7.72034 5.0498C5.83172 6.5172 4.32075 8.28901 3.42151 9.46289L3.41565 9.46973C3.29793 9.62143 3.23401 9.80797 3.23401 10ZM18.9996 10C18.9996 12.7614 16.7611 15 13.9996 15C11.2384 14.9998 8.99963 12.7613 8.99963 10C8.99963 7.2387 11.2384 5.00021 13.9996 5C16.7611 5 18.9996 7.23858 18.9996 10Z" />
+                </Border>-->
+            </Grid>
+            <Border CornerRadius="30"
+                    Height="60"
+                    Width="280"
+                    HorizontalAlignment="Center"
+                    MouseLeftButtonDown="OpenLerningModules">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background"
+                                Value="{StaticResource NormalBaseColor}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=emailEntry}"
+                                         Value="">
+                                <Setter Property="Background"
+                                        Value="{StaticResource DarkBaseColor}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text, ElementName=passwordEntry}"
+                                         Value="">
+                                <Setter Property="Background"
+                                        Value="{StaticResource DarkBaseColor}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="Войти"
+                               Margin="30, 0, 0, 0"
+                               FontSize="20"
+                               FontFamily="{StaticResource YsabeauInfant-Bold}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource WhiteBaseColor}" />
+                    <Border Grid.Column="1"
+                            CornerRadius="25"
+                            Margin="0,0,5,0"
+                            Background="{StaticResource WhiteBaseColor}"
+                            Height="50"
+                            Width="50"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Path Data="M1.22217 1.27783L10.9444 11.0001L1.22217 20.7223"
+                              StrokeThickness="2"
+                              StrokeLineJoin="Round"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              Margin="5,0,0,0"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Stroke"
+                                            Value="{StaticResource NormalBaseColor}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=emailEntry}"
+                                                     Value="">
+                                            <Setter Property="Stroke"
+                                                    Value="{StaticResource DarkBaseColor}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text, ElementName=passwordEntry}"
+                                                     Value="">
+                                            <Setter Property="Stroke"
+                                                    Value="{StaticResource DarkBaseColor}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Border>
+                </Grid>
+            </Border>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,45,0,0"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Еще нет аккаунта?"
+                           FontSize="20"
+                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource DarkBaseColor}" />
+                <TextBlock Text="Регистрация"
+                           TextDecorations="Underline"
+                           FontSize="20"
+                           Margin="5, 0"
+                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource NormalBaseColor}"
+                           MouseLeftButtonDown="OpenSingInPage" />
+            </StackPanel>
+            <Label Content="TEMPUS VELIT"
+                   HorizontalContentAlignment="Center"
+                   Margin="0, 60"
+                   FontSize="40"
+                   FontFamily="{StaticResource Jost-SemiBold}"
+                   Foreground="{StaticResource LightBaseColor}" />
+        </StackPanel>
+    </Border>
+</Page>

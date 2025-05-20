@@ -1,0 +1,218 @@
+﻿<Page x:Class="TempusVelit.Pages.FirstStagePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TempusVelit.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="1500"
+      d:DesignWidth="1440"
+      Background="White">
+    <Grid Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                CornerRadius="16"
+                BorderThickness="0"
+                Background="{StaticResource LightBaseColor}">
+            <Grid Margin="50, 25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0"
+                        Grid.Row="0"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        PreviewMouseLeftButtonDown="GoBack">
+                    <Path Data="M11.9333 18.2868C13.4784 16.4638 15.5459 15.1593 17.8564 14.5496C20.1669 13.9398 22.6089 14.0543 24.8523 14.8774C27.0956 15.7006 29.0321 17.1928 30.3998 19.1522C31.7676 21.1116 32.5007 23.4438 32.5 25.8334C32.5 26.4965 32.7634 27.1324 33.2322 27.6012C33.7011 28.07 34.337 28.3334 35 28.3334C35.663 28.3334 36.2989 28.07 36.7678 27.6012C37.2366 27.1324 37.5 26.4965 37.5 25.8334C37.5 16.6284 30.0383 9.16676 20.8333 9.16676C18.5027 9.1639 16.1975 9.65136 14.0675 10.5975C11.9375 11.5436 10.0304 12.9272 8.47001 14.6584L7.89167 11.3834C7.84049 11.0549 7.72431 10.74 7.54992 10.4569C7.37554 10.1739 7.14646 9.92849 6.87608 9.73506C6.6057 9.54163 6.29946 9.40407 5.97527 9.33043C5.65109 9.25678 5.31547 9.24854 4.98806 9.30617C4.66065 9.36381 4.34802 9.48617 4.06847 9.66609C3.78892 9.846 3.54807 10.0799 3.35999 10.354C3.17192 10.6281 3.04041 10.937 2.97316 11.2626C2.90591 11.5882 2.90427 11.9239 2.96834 12.2501L4.70501 22.1001C4.82001 22.7518 5.18834 23.3334 5.73334 23.7134C6.40501 24.1834 7.29001 24.2884 8.04167 24.0501L17.4483 22.3901C17.7768 22.3389 18.0918 22.2227 18.3748 22.0483C18.6579 21.874 18.9033 21.6449 19.0967 21.3745C19.2901 21.1041 19.4277 20.7979 19.5013 20.4737C19.575 20.1495 19.5832 19.8139 19.5256 19.4865C19.468 19.1591 19.3456 18.8464 19.1657 18.5669C18.9858 18.2873 18.7519 18.0465 18.4778 17.8584C18.2036 17.6703 17.8947 17.5388 17.5692 17.4716C17.2436 17.4043 16.9079 17.4027 16.5817 17.4668L11.935 18.2851L11.9333 18.2868Z"
+                          Fill="{StaticResource DarkBaseColor}"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center" />
+                </Border>
+                <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                           HorizontalAlignment="Center"
+                           Foreground="{StaticResource DarkBaseColor}"
+                           FontSize="30"
+                           FontFamily="{StaticResource YsabeauInfant-Medium}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}. {1}">
+                            <Binding Path="Lesson.OrderNumber" />
+                            <Binding Path="Lesson.LessonName" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <StackPanel Grid.Column="2"
+                            Grid.Row="0">
+                    <Path Data="M30.5496 32.3772C31.0077 32.3777 31.4483 32.5531 31.7813 32.8676C32.1144 33.182 32.3149 33.6118 32.3417 34.069C32.3686 34.5263 32.2198 34.9766 31.9258 35.3279C31.6318 35.6791 31.2148 35.9049 30.7599 35.959L30.5496 35.9715H17.9695C17.5114 35.971 17.0709 35.7956 16.7378 35.4812C16.4047 35.1667 16.2043 34.737 16.1774 34.2797C16.1506 33.8224 16.2994 33.3722 16.5934 33.0209C16.8874 32.6696 17.3044 32.4439 17.7592 32.3898L17.9695 32.3772H30.5496ZM31.6836 6.08116C32.101 6.49838 32.432 6.99372 32.6579 7.53891C32.8837 8.08409 33 8.66842 33 9.25854C33 9.84865 32.8837 10.433 32.6579 10.9782C32.432 11.5234 32.101 12.0187 31.6836 12.4359L12.1018 32.0178C11.8732 32.2464 11.6054 32.4321 11.311 32.5659L4.47463 35.6732C2.96142 36.3615 1.40508 34.8034 2.09339 33.2902L5.20248 26.4538C5.33575 26.1596 5.52081 25.8918 5.74882 25.663L25.3307 6.08116C26.1732 5.23887 27.3158 4.7657 28.5072 4.7657C29.6985 4.7657 30.8411 5.23887 31.6836 6.08116ZM27.8737 8.62234L8.40322 28.0892L7.3447 30.4201L9.67382 29.3598L29.1425 9.89473C29.2283 9.81184 29.2967 9.71269 29.3438 9.60306C29.3909 9.49343 29.4157 9.37552 29.4167 9.2562C29.4178 9.13689 29.3951 9.01857 29.3499 8.90813C29.3047 8.7977 29.238 8.69737 29.1536 8.613C29.0692 8.52863 28.9689 8.46191 28.8585 8.41673C28.748 8.37155 28.6297 8.34881 28.5104 8.34985C28.3911 8.35089 28.2732 8.37567 28.1635 8.42277C28.0539 8.46986 27.9548 8.53832 27.8719 8.62414M7.18655 0.0283203C7.56142 0.0284699 7.92687 0.145844 8.23172 0.364011C8.53658 0.582178 8.76558 0.890215 8.88666 1.245L9.12029 1.92432C9.38627 2.70385 9.8273 3.41208 10.4096 3.99464C10.9918 4.57721 11.6998 5.01862 12.4792 5.28502L13.1585 5.51685C13.5129 5.63829 13.8205 5.86744 14.0383 6.17226C14.256 6.47709 14.3731 6.84234 14.3731 7.21696C14.3731 7.59158 14.256 7.95684 14.0383 8.26166C13.8205 8.56649 13.5129 8.79564 13.1585 8.91708L12.4792 9.15071C11.6997 9.41668 10.9914 9.85772 10.4089 10.44C9.8263 11.0222 9.38488 11.7302 9.11849 12.5096L8.88666 13.1889C8.76522 13.5433 8.53607 13.8509 8.23125 14.0687C7.92642 14.2864 7.56117 14.4035 7.18655 14.4035C6.81193 14.4035 6.44667 14.2864 6.14185 14.0687C5.83702 13.8509 5.60787 13.5433 5.48643 13.1889L5.2528 12.5096C4.98683 11.7301 4.54579 11.0219 3.96353 10.4393C3.38128 9.85672 2.67329 9.4153 1.89391 9.14891L1.21458 8.91708C0.86019 8.79564 0.552607 8.56649 0.334838 8.26166C0.117069 7.95684 0 7.59158 0 7.21696C0 6.84234 0.117069 6.47709 0.334838 6.17226C0.552607 5.86744 0.86019 5.63829 1.21458 5.51685L1.89391 5.28322C2.67343 5.01724 3.38166 4.57621 3.96422 3.99395C4.54679 3.4117 4.98821 2.70371 5.2546 1.92432L5.48643 1.245C5.60752 0.890215 5.83652 0.582178 6.14137 0.364011C6.44622 0.145844 6.81167 0.0284699 7.18655 0.0283203ZM7.18655 5.77205C6.76142 6.30706 6.27664 6.79183 5.74163 7.21696C6.27838 7.64229 6.76002 8.12393 7.18655 8.66188C7.61187 8.12513 8.09351 7.64349 8.63146 7.21696C8.09645 6.79183 7.61168 6.30706 7.18655 5.77205Z"
+                          Fill="{StaticResource WhiteBaseColor}"
+                          HorizontalAlignment="Center" />
+                    <TextBlock Text="1 ЭТАП"
+                               Foreground="{StaticResource WhiteBaseColor}"
+                               FontSize="14"
+                               FontFamily="{StaticResource Jost-SemiBold}" />
+                </StackPanel>
+                <TextBlock Margin="0, 10"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="3"
+                           Grid.Row="1"
+                           HorizontalAlignment="Left"
+                           Foreground="{StaticResource DarkBaseColor}"
+                           Text="Необходимо пройти тестовые задания и набрать как можно больше баллов."
+                           FontSize="25"
+                           FontFamily="{StaticResource Jost-Light}" />
+            </Grid>
+        </Border>
+        <Border Grid.Row="1"
+                CornerRadius="16, 16, 0, 0"
+                Margin="0, 30, 0, 0"
+                BorderThickness="3"
+                BorderBrush="{StaticResource LightBaseColor}"
+                Background="{StaticResource WhiteBaseColor}"
+                Padding="50, 40">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Column="0"
+                                Grid.Row="0"
+                                Background="{StaticResource LightBaseColor}"
+                                CornerRadius="10"
+                                Height="35"
+                                Width="40"
+                                Margin="0, 0, 10, 0">
+                            <TextBlock Text="01"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                        </Border>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource DarkBaseColor}"
+                                   Text="Необходимо пройти тестовые задания и набрать как можно больше баллов."
+                                   FontSize="25"
+                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                        <StackPanel Grid.Column="1"
+                                    Grid.Row="1">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0, 15, 0, 0">
+                                <CheckBox Style="{DynamicResource CheckBoxStyle}"
+                                          Margin="0, 0, 15, 0"/>
+                                <TextBlock HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           Text="INSERT"
+                                           FontSize="23"
+                                           FontFamily="{StaticResource Jost-Light}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <ListView BorderThickness="0"
+                              Background="Transparent"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                              ScrollViewer.CanContentScroll="False"
+                              PreviewMouseWheel="ListViewPreviewMouseWheel">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                                <Setter Property="Margin"
+                                        Value="0, 0, 0, 30" />
+                                <Setter Property="Template"
+                                        Value="{StaticResource ListViewItemStyle}">
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Grid Margin="0, 50, 0, 30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left">
+                            <TextBlock Text="ЗАТРАЧЕННОЕ ВРЕМЯ"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                       Margin="0, 0, 20, 0" />
+                            <Border Background="{StaticResource LightBaseColor}"
+                                    CornerRadius="10"
+                                    Height="35"
+                                    Width="40">
+                                <TextBlock x:Name="tbMin"
+                                           Text="00"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                            </Border>
+                            <TextBlock Text=":"
+                                       HorizontalAlignment="Left"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                       Margin="7, 0" />
+                            <Border Background="{StaticResource LightBaseColor}"
+                                    CornerRadius="10"
+                                    Height="35"
+                                    Width="40">
+                                <TextBlock x:Name="tbSec"
+                                           Text="00"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Background="Transparent"
+                                    PreviewMouseLeftButtonDown="OpenPanel">
+                            <TextBlock Text="РЕЗУЛЬТАТ"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                            <Grid VerticalAlignment="Center"
+                                  Margin="10, 0, 0, 0">
+                                <Path Data="M15 7.5L13.6594 8.80594L18.8906 14.0625H7.5V15.9375H18.8906L13.6594 21.1622L15 22.5L22.5 15L15 7.5Z"
+                                      Fill="{StaticResource DarkBaseColor}" />
+                                <Path Data="M15 28.125C12.4041 28.125 9.86654 27.3552 7.70815 25.913C5.54975 24.4708 3.86749 22.421 2.87409 20.0227C1.88069 17.6244 1.62077 14.9854 2.1272 12.4394C2.63363 9.89344 3.88366 7.55479 5.71923 5.71922C7.55479 3.88366 9.89345 2.63362 12.4394 2.12719C14.9854 1.62076 17.6244 1.88068 20.0227 2.87408C22.421 3.86748 24.4708 5.54974 25.913 7.70814C27.3552 9.86653 28.125 12.4041 28.125 15C28.121 18.4797 26.7369 21.8158 24.2764 24.2764C21.8158 26.7369 18.4798 28.121 15 28.125ZM15 3.75C12.775 3.75 10.5999 4.4098 8.74984 5.64597C6.89979 6.88213 5.45785 8.63914 4.60636 10.6948C3.75488 12.7505 3.53209 15.0125 3.96617 17.1948C4.40026 19.3771 5.47171 21.3816 7.04505 22.9549C8.61839 24.5283 10.623 25.5997 12.8052 26.0338C14.9875 26.4679 17.2495 26.2451 19.3052 25.3936C21.3609 24.5422 23.1179 23.1002 24.354 21.2502C25.5902 19.4001 26.25 17.225 26.25 15C26.2465 12.0174 25.0602 9.15792 22.9511 7.04888C20.8421 4.93985 17.9826 3.75347 15 3.75Z"
+                                      Fill="{StaticResource DarkBaseColor}" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

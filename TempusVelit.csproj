@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,8 +50,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.12.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.12.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,13 +82,84 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Assets\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\EmailErrorConverter.cs" />
+    <Compile Include="Assets\EmailExistConverter.cs" />
+    <Compile Include="Assets\LessonsCountToArcSegmentConverter.cs" />
+    <Compile Include="Assets\LessonsCountToFullProgressConverter.cs" />
+    <Compile Include="Assets\LessonsCountToProgressConverter.cs" />
+    <Compile Include="Assets\LessonsCountToWidthConverter.cs" />
+    <Compile Include="Assets\Message.cs" />
+    <Compile Include="Assets\PasswordErrorConverter.cs" />
+    <Compile Include="Assets\TextBoxWithPlaceholder.xaml.cs">
+      <DependentUpon>TextBoxWithPlaceholder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\UserLessonToEllipseColorConverter.cs" />
+    <Compile Include="Database\Answer.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ControlTask.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\LearningModule.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Lesson.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Question.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Stage.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\TempusVelitModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TempusVelitModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\TempusVelitModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\TempusVelitModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TempusVelitModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\TempusVelitData.cs" />
+    <Compile Include="Database\User.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\UserControlTask.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\UserLesson.cs">
+      <DependentUpon>TempusVelitModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FamilyMember.cs" />
+    <Compile Include="MainNavigationWindow.xaml.cs">
+      <DependentUpon>MainNavigationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FirstStagePage.xaml.cs">
+      <DependentUpon>FirstStagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LessonPage.xaml.cs">
+      <DependentUpon>LessonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Assets\DialogWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\MenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -71,10 +169,14 @@
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\HiddenMenuProperty.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Assets\TextBoxWithPlaceholder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainNavigationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AchievementRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -83,11 +185,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\FirstStagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LearningModules.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\LessonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LogInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SingInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,8 +224,14 @@
     <Compile Include="Pages\LearningModules.xaml.cs">
       <DependentUpon>LearningModules.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LogInPage.xaml.cs">
+      <DependentUpon>LogInPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SingInPage.xaml.cs">
+      <DependentUpon>SingInPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -128,6 +256,18 @@
     <Resource Include="Fonts\YsabeauInfant-Medium.ttf" />
     <Resource Include="Fonts\YsabeauInfant-Regular.ttf" />
     <Resource Include="Fonts\YsabeauInfant-SemiBold.ttf" />
+    <Resource Include="Fonts\YsabeauInfant-Black.ttf" />
+    <Resource Include="Fonts\Jost-Medium.ttf" />
+    <Resource Include="Fonts\YsabeauInfant-Bold.ttf" />
+    <EntityDeploy Include="Database\TempusVelitModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TempusVelitModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\TempusVelitModel.edmx.diagram">
+      <DependentUpon>TempusVelitModel.edmx</DependentUpon>
+    </None>
+    <Resource Include="Fonts\Jost-Light.ttf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -138,6 +278,40 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ellipse_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\TempusVelitModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TempusVelitModel.Context.cs</LastGenOutput>
+      <DependentUpon>TempusVelitModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Database\TempusVelitModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TempusVelitModel.edmx</DependentUpon>
+      <LastGenOutput>TempusVelitModel.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Resources\dialogIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

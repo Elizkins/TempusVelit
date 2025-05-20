@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TempusVelit.Database;
 
 namespace TempusVelit.Pages
 {
@@ -23,6 +24,28 @@ namespace TempusVelit.Pages
         public ControlRoom()
         {
             InitializeComponent();
+            lvTasks.ItemsSource = TempusVelitData.Context.ControlTask.ToList();
+
+        }
+
+        private void OpenFirstStage(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new FirstStagePage((sender as Border).DataContext as ControlTask));
+        }
+
+        private void ListViewPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                e.Handled = true;
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = UIElement.MouseWheelEvent,
+                    Source = sender
+                };
+                var parent = ((Control)sender).Parent as UIElement;
+                parent.RaiseEvent(eventArg);
+            }
         }
     }
 }

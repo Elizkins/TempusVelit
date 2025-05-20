@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TempusVelitModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnswerText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="IsCorrect" Type="bit" />
+        </EntityType>
+        <EntityType Name="ControlTask">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LessonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LearningModule">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessonName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="StageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="StageID" />
+          </Key>
+          <Property Name="StageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StageName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastLoginDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserControlTask">
+          <Key>
+            <PropertyRef Name="UserControlTaskID" />
+          </Key>
+          <Property Name="UserControlTaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" />
+        </EntityType>
+        <EntityType Name="UserLesson">
+          <Key>
+            <PropertyRef Name="UserLessonID" />
+          </Key>
+          <Property Name="UserLessonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="LessonID" Type="int" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Answer__Question__412EB0B6">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ControlTa__Lesso__34C8D9D1">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="ControlTask" Type="Self.ControlTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="ControlTask">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__ModuleID__2C3393D0">
+          <End Role="LearningModule" Type="Self.LearningModule" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LearningModule">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__StageI__3D5E1FD2">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="StageID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="StageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__TaskID__3C69FB99">
+          <End Role="ControlTask" Type="Self.ControlTask" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ControlTask">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserContr__TaskI__398D8EEE">
+          <End Role="ControlTask" Type="Self.ControlTask" Multiplicity="1" />
+          <End Role="UserControlTask" Type="Self.UserControlTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ControlTask">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="UserControlTask">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserContr__UserI__38996AB5">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserControlTask" Type="Self.UserControlTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserControlTask">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLesso__Lesso__31EC6D26">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="UserLesson" Type="Self.UserLesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="UserLesson">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLesso__UserI__30F848ED">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserLesson" Type="Self.UserLesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserLesson">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TempusVelitModelContainer">
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ControlTask" EntityType="Self.ControlTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LearningModule" EntityType="Self.LearningModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserControlTask" EntityType="Self.UserControlTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLesson" EntityType="Self.UserLesson" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Answer__Question__412EB0B6" Association="Self.FK__Answer__Question__412EB0B6">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ControlTa__Lesso__34C8D9D1" Association="Self.FK__ControlTa__Lesso__34C8D9D1">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="ControlTask" EntitySet="ControlTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__ModuleID__2C3393D0" Association="Self.FK__Lesson__ModuleID__2C3393D0">
+            <End Role="LearningModule" EntitySet="LearningModule" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__StageI__3D5E1FD2" Association="Self.FK__Question__StageI__3D5E1FD2">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__TaskID__3C69FB99" Association="Self.FK__Question__TaskID__3C69FB99">
+            <End Role="ControlTask" EntitySet="ControlTask" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserContr__TaskI__398D8EEE" Association="Self.FK__UserContr__TaskI__398D8EEE">
+            <End Role="ControlTask" EntitySet="ControlTask" />
+            <End Role="UserControlTask" EntitySet="UserControlTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserContr__UserI__38996AB5" Association="Self.FK__UserContr__UserI__38996AB5">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserControlTask" EntitySet="UserControlTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLesso__Lesso__31EC6D26" Association="Self.FK__UserLesso__Lesso__31EC6D26">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="UserLesson" EntitySet="UserLesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLesso__UserI__30F848ED" Association="Self.FK__UserLesso__UserI__30F848ED">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserLesson" EntitySet="UserLesson" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TempusVelitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="IsCorrect" Type="Boolean" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Answer__Question__412EB0B6" FromRole="Answer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="ControlTask">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LessonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK__ControlTa__Lesso__34C8D9D1" FromRole="ControlTask" ToRole="Lesson" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Question__TaskID__3C69FB99" FromRole="ControlTask" ToRole="Question" />
+          <NavigationProperty Name="UserControlTask" Relationship="Self.FK__UserContr__TaskI__398D8EEE" FromRole="ControlTask" ToRole="UserControlTask" />
+        </EntityType>
+        <EntityType Name="LearningModule">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK__Lesson__ModuleID__2C3393D0" FromRole="LearningModule" ToRole="Lesson" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LessonName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ControlTask" Relationship="Self.FK__ControlTa__Lesso__34C8D9D1" FromRole="Lesson" ToRole="ControlTask" />
+          <NavigationProperty Name="LearningModule" Relationship="Self.FK__Lesson__ModuleID__2C3393D0" FromRole="Lesson" ToRole="LearningModule" />
+          <NavigationProperty Name="UserLesson" Relationship="Self.FK__UserLesso__Lesso__31EC6D26" FromRole="Lesson" ToRole="UserLesson" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="StageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answer" Relationship="Self.FK__Answer__Question__412EB0B6" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="ControlTask" Relationship="Self.FK__Question__TaskID__3C69FB99" FromRole="Question" ToRole="ControlTask" />
+          <NavigationProperty Name="Stage" Relationship="Self.FK__Question__StageI__3D5E1FD2" FromRole="Question" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="StageID" />
+          </Key>
+          <Property Name="StageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Question__StageI__3D5E1FD2" FromRole="Stage" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserControlTask" Relationship="Self.FK__UserContr__UserI__38996AB5" FromRole="User" ToRole="UserControlTask" />
+          <NavigationProperty Name="UserLesson" Relationship="Self.FK__UserLesso__UserI__30F848ED" FromRole="User" ToRole="UserLesson" />
+        </EntityType>
+        <EntityType Name="UserControlTask">
+          <Key>
+            <PropertyRef Name="UserControlTaskID" />
+          </Key>
+          <Property Name="UserControlTaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Int32" />
+          <NavigationProperty Name="ControlTask" Relationship="Self.FK__UserContr__TaskI__398D8EEE" FromRole="UserControlTask" ToRole="ControlTask" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserContr__UserI__38996AB5" FromRole="UserControlTask" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserLesson">
+          <Key>
+            <PropertyRef Name="UserLessonID" />
+          </Key>
+          <Property Name="UserLessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="LessonID" Type="Int32" Nullable="false" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK__UserLesso__Lesso__31EC6D26" FromRole="UserLesson" ToRole="Lesson" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserLesso__UserI__30F848ED" FromRole="UserLesson" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Answer__Question__412EB0B6">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ControlTa__Lesso__34C8D9D1">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="ControlTask" Type="Self.ControlTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="ControlTask">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__TaskID__3C69FB99">
+          <End Role="ControlTask" Type="Self.ControlTask" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ControlTask">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserContr__TaskI__398D8EEE">
+          <End Role="ControlTask" Type="Self.ControlTask" Multiplicity="1" />
+          <End Role="UserControlTask" Type="Self.UserControlTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ControlTask">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="UserControlTask">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__ModuleID__2C3393D0">
+          <End Role="LearningModule" Type="Self.LearningModule" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LearningModule">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLesso__Lesso__31EC6D26">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="UserLesson" Type="Self.UserLesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="UserLesson">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__StageI__3D5E1FD2">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="StageID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="StageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserContr__UserI__38996AB5">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserControlTask" Type="Self.UserControlTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserControlTask">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserLesso__UserI__30F848ED">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserLesson" Type="Self.UserLesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserLesson">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TempusVelitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answer" EntityType="Self.Answer" />
+          <EntitySet Name="ControlTask" EntityType="Self.ControlTask" />
+          <EntitySet Name="LearningModule" EntityType="Self.LearningModule" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" />
+          <EntitySet Name="Question" EntityType="Self.Question" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserControlTask" EntityType="Self.UserControlTask" />
+          <EntitySet Name="UserLesson" EntityType="Self.UserLesson" />
+          <AssociationSet Name="FK__Answer__Question__412EB0B6" Association="Self.FK__Answer__Question__412EB0B6">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ControlTa__Lesso__34C8D9D1" Association="Self.FK__ControlTa__Lesso__34C8D9D1">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="ControlTask" EntitySet="ControlTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__TaskID__3C69FB99" Association="Self.FK__Question__TaskID__3C69FB99">
+            <End Role="ControlTask" EntitySet="ControlTask" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserContr__TaskI__398D8EEE" Association="Self.FK__UserContr__TaskI__398D8EEE">
+            <End Role="ControlTask" EntitySet="ControlTask" />
+            <End Role="UserControlTask" EntitySet="UserControlTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__ModuleID__2C3393D0" Association="Self.FK__Lesson__ModuleID__2C3393D0">
+            <End Role="LearningModule" EntitySet="LearningModule" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLesso__Lesso__31EC6D26" Association="Self.FK__UserLesso__Lesso__31EC6D26">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="UserLesson" EntitySet="UserLesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__StageI__3D5E1FD2" Association="Self.FK__Question__StageI__3D5E1FD2">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserContr__UserI__38996AB5" Association="Self.FK__UserContr__UserI__38996AB5">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserControlTask" EntitySet="UserControlTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserLesso__UserI__30F848ED" Association="Self.FK__UserLesso__UserI__30F848ED">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserLesson" EntitySet="UserLesson" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TempusVelitModelContainer" CdmEntityContainer="TempusVelitEntities">
+          <EntitySetMapping Name="Answer">
+            <EntityTypeMapping TypeName="TempusVelitModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlTask">
+            <EntityTypeMapping TypeName="TempusVelitModel.ControlTask">
+              <MappingFragment StoreEntitySet="ControlTask">
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LearningModule">
+            <EntityTypeMapping TypeName="TempusVelitModel.LearningModule">
+              <MappingFragment StoreEntitySet="LearningModule">
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lesson">
+            <EntityTypeMapping TypeName="TempusVelitModel.Lesson">
+              <MappingFragment StoreEntitySet="Lesson">
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="TempusVelitModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="StageID" ColumnName="StageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stage">
+            <EntityTypeMapping TypeName="TempusVelitModel.Stage">
+              <MappingFragment StoreEntitySet="Stage">
+                <ScalarProperty Name="StageID" ColumnName="StageID" />
+                <ScalarProperty Name="StageName" ColumnName="StageName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="TempusVelitModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserControlTask">
+            <EntityTypeMapping TypeName="TempusVelitModel.UserControlTask">
+              <MappingFragment StoreEntitySet="UserControlTask">
+                <ScalarProperty Name="UserControlTaskID" ColumnName="UserControlTaskID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLesson">
+            <EntityTypeMapping TypeName="TempusVelitModel.UserLesson">
+              <MappingFragment StoreEntitySet="UserLesson">
+                <ScalarProperty Name="UserLessonID" ColumnName="UserLessonID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

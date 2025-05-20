@@ -6,302 +6,331 @@
       xmlns:local="clr-namespace:TempusVelit.Pages"
       xmlns:assets="clr-namespace:TempusVelit.Assets"
       mc:Ignorable="d"
-      d:DesignHeight="1500"
-      d:DesignWidth="1440"
       Background="White">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <assets:MenuControl Grid.Column="0"
-                            HorizontalAlignment="Left"
-                            Width="100" />
-        <ScrollViewer Grid.Column="1"
-                      VerticalScrollBarVisibility="Hidden">
-            <Grid Margin="40, 40, 40, 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0"
-                       Grid.Row="0"
-                       Content="Привет, Ари"
-                       Margin="35, 0, 0, 0"
-                       HorizontalContentAlignment="Center"
-                       FontSize="48"
-                       FontFamily="{StaticResource YsabeauInfant-SemiBold}" />
-                <Border Grid.Column="1"
-                        Grid.Row="0" />
-                <Border Grid.Column="2"
-                        Grid.Row="0"
-                        Margin="0, 0, 45, 0"
-                        HorizontalAlignment="Right"
-                        BorderThickness="3"
-                        BorderBrush="{StaticResource LightBaseColor}"
-                        Height="80"
-                        Width="250"
+    <ScrollViewer Grid.Column="1"
+                  VerticalScrollBarVisibility="Hidden">
+        <Grid Margin="40, 40, 40, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Content="Привет, Ари"
+                   Margin="35, 0, 0, 0"
+                   HorizontalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="36"
+                   FontFamily="{StaticResource YsabeauInfant-SemiBold}" />
+            <Border Grid.Column="1"
+                    Grid.Row="0" />
+            <Border Grid.Column="2"
+                    Grid.Row="0"
+                    Margin="0, 0, 45, 0"
+                    HorizontalAlignment="Right"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource LightBaseColor}"
+                    Height="70"
+                    Width="250"
+                    CornerRadius="16">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black"
+                                      BlurRadius="10"
+                                      Opacity="0.25"
+                                      Direction="310" />
+                </Border.Effect>
+                <Border Background="{StaticResource WhiteBaseColor}"
                         CornerRadius="16">
-                    <Border.Effect>
-                        <DropShadowEffect Color="Black"
-                                          BlurRadius="10"
-                                          Opacity="0.25"
-                                          Direction="310" />
-                    </Border.Effect>
-                    <Border Background="{StaticResource WhiteBaseColor}"
-                            CornerRadius="16">
-                        <Label Grid.Column="0"
-                               Content="Уровень 3"
-                               Foreground="{StaticResource NormalBaseColor}"
-                               HorizontalContentAlignment="Center"
-                               VerticalContentAlignment="Center"
-                               FontSize="36"
-                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                    <Label Grid.Column="0"
+                           Content="Уровень 3"
+                           Foreground="{StaticResource NormalBaseColor}"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           FontSize="30"
+                           FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                </Border>
+            </Border>
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="1"
+                    Height="380"
+                    Margin="0, 40, 0, 40"
+                    CornerRadius="16"
+                    BorderThickness="0"
+                    Background="{StaticResource LightBaseColor}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0"
+                            Width="350"
+                            HorizontalAlignment="Left"
+                            Margin="3"
+                            CornerRadius="15"
+                            BorderThickness="0"
+                            Background="{StaticResource WhiteBaseColor}">
+                        <StackPanel VerticalAlignment="Center">
+                            <Border Height="200"
+                                    Width="200"
+                                    CornerRadius="130"
+                                    BorderBrush="{StaticResource LightBaseColor}"
+                                    BorderThickness="7">
+                                <Image Source="/Resources/avatar.png" />
+                            </Border>
+                            <Label Margin="0, 35, 0, 0"
+                                   Content="МЕСТО В РЕЙТИГЕ"
+                                   HorizontalContentAlignment="Center"
+                                   FontSize="20"
+                                   FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
+                            <Label Content="72"
+                                   HorizontalContentAlignment="Center"
+                                   FontSize="26"
+                                   FontFamily="{StaticResource YsabeauInfant-SemiBold}" />
+                        </StackPanel>
                     </Border>
-                </Border>
-                <Border Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        Grid.Row="1"
-                        Height="500"
-                        Margin="0, 40, 0, 70"
-                        CornerRadius="16"
-                        BorderThickness="0"
-                        Background="{StaticResource LightBaseColor}">
-                    <Grid>
+                    <Grid Grid.Column="1"
+                          Margin="50, 0, 50, 0"
+                          VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                Width="373"
-                                HorizontalAlignment="Left"
-                                Margin="3"
-                                CornerRadius="15"
-                                BorderThickness="0"
-                                Background="{StaticResource WhiteBaseColor}">
-                            <StackPanel VerticalAlignment="Center">
-                                <Border Height="260"
-                                        Width="260"
-                                        CornerRadius="130"
-                                        BorderBrush="{StaticResource LightBaseColor}"
-                                        BorderThickness="7">
-                                    <Image Source="/Resources/avatar.png" />
-                                </Border>
-                                <Label Margin="0, 35, 0, 0"
-                                       Content="МЕСТО В РЕЙТИГЕ"
-                                       HorizontalContentAlignment="Center"
-                                       FontSize="23"
-                                       FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
-                                <Label Content="72"
-                                       HorizontalContentAlignment="Center"
-                                       FontSize="34"
-                                       FontFamily="{StaticResource YsabeauInfant-SemiBold}" />
-                            </StackPanel>
-                        </Border>
-                        <Grid Grid.Column="1"
-                              Margin="50, 0, 50, 0"
-                              VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0"
-                                   Grid.Row="0"
-                                   Content="Уровень 3"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   FontSize="34"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
-                            <Label Grid.Column="1"
-                                   Grid.Row="0"
-                                   Content="ЕЩЕ 31 БАЛЛ"
-                                   VerticalContentAlignment="Center"
-                                   HorizontalContentAlignment="Right"
-                                   FontSize="23"
-                                   FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
-                            <Grid Grid.Column="0"
-                                  Grid.ColumnSpan="2"
-                                  Grid.Row="1"
-                                  Margin="0, 30, 0, 40">
-                                <Border BorderThickness="0"
-                                        Background="{StaticResource WhiteBaseColor}"
-                                        CornerRadius="5"
-                                        Height="10" />
-                                <Border BorderThickness="0"
-                                        Background="{StaticResource DarkBaseColor}"
-                                        CornerRadius="5"
-                                        Height="10"
-                                        Width="560"
-                                        HorizontalAlignment="Left" />
-                            </Grid>
-                            <Label Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   Grid.Row="2"
-                                   Content="Последние достижения"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="34"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
-                            <StackPanel Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        Grid.Row="3"
-                                        Orientation="Horizontal"
-                                        Margin="0, 20, 0, 40">
-                                <Border Height="120"
-                                        Width="120"
-                                        CornerRadius="60"
-                                        BorderBrush="{StaticResource WhiteBaseColor}"
-                                        BorderThickness="5"
-                                        Margin="0, 0, 25, 0">
-                                    <Image Source="/Resources/avatar.png" />
-                                </Border>
-                                <Border Height="120"
-                                        Width="120"
-                                        CornerRadius="60"
-                                        BorderBrush="{StaticResource WhiteBaseColor}"
-                                        BorderThickness="5"
-                                        Margin="0, 0, 25, 0">
-                                    <Image Source="/Resources/avatar.png" />
-                                </Border>
-                                <Border Height="120"
-                                        Width="120"
-                                        CornerRadius="60"
-                                        BorderBrush="{StaticResource WhiteBaseColor}"
-                                        BorderThickness="5"
-                                        Margin="0, 0, 25, 0">
-                                    <Image Source="/Resources/avatar.png" />
-                                </Border>
-                                <Border Height="120"
-                                        Width="120"
-                                        CornerRadius="60"
-                                        BorderBrush="{StaticResource WhiteBaseColor}"
-                                        BorderThickness="5">
-                                    <Image Source="/Resources/avatar.png" />
-                                </Border>
-                            </StackPanel>
-                            <Label Grid.Column="0"
-                                   Grid.Row="4"
-                                   Content="ПРОЙДЕНО 15 ИЗ 47 УРОКОВ"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="20"
-                                   FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
-                            <Label Grid.Column="1"
-                                   Grid.Row="4"
-                                   Content="ПОСЛЕДНИЙ ВХОД: 2025.02.15 20:30"
-                                   HorizontalContentAlignment="Right"
-                                   FontSize="20"
-                                   FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
-                        </Grid>
-                    </Grid>
-                </Border>
-                <Border Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        Grid.Row="2"
-                        Height="480"
-                        CornerRadius="16, 16, 0, 0"
-                        BorderThickness="3"
-                        BorderBrush="{StaticResource LightBaseColor}"
-                        Background="{StaticResource WhiteBaseColor}">
-                    <Grid Margin="70">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Grid.Column="0"
-                               Grid.ColumnSpan="2"
                                Grid.Row="0"
-                               Content="Персональная информация"
+                               Content="Уровень 3"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               FontSize="26"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                        <Label Grid.Column="1"
+                               Grid.Row="0"
+                               Content="ЕЩЕ 31 БАЛЛ"
+                               VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Right"
+                               FontSize="20"
+                               FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
+                        <Grid Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Grid.Row="1"
+                              Margin="0, 10, 0, 20">
+                            <Border BorderThickness="0"
+                                    Background="{StaticResource WhiteBaseColor}"
+                                    CornerRadius="5"
+                                    Height="10" />
+                            <Border BorderThickness="0"
+                                    Background="{StaticResource DarkBaseColor}"
+                                    CornerRadius="5"
+                                    Height="10"
+                                    Width="200"
+                                    HorizontalAlignment="Left" />
+                        </Grid>
+                        <Label Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="2"
+                               Content="Последние достижения"
                                Foreground="{StaticResource BlackBaseColor}"
                                HorizontalContentAlignment="Left"
-                               FontSize="34"
+                               FontSize="26"
                                FontFamily="{StaticResource YsabeauInfant-Medium}" />
-
                         <StackPanel Grid.Column="0"
-                                    Grid.Row="2"
-                                    Height="65"
-                                    Margin="0, 50, 0, 60">
-                            <Label Content="Фамилия"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="24"
-                                   FontFamily="{StaticResource Jost-ExtraLight}"
-                                   Margin="-5, -10, 0, -15"/>
-                            <Label Content="Lindgren"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="30"
-                                   Margin="-5, 0, 0, 0"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
-                        </StackPanel>
-                        <StackPanel Grid.Column="1"
-                                    Grid.Row="2"
-                                    Height="65">
-                            <Label Content="Имя"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="24"
-                                   FontFamily="{StaticResource Jost-ExtraLight}"
-                                   Margin="-5, -10, 0, -15" />
-                            <Label Content="Ari"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="30"
-                                   Margin="-5, 0, 0, 0"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
-                        </StackPanel>
-                        <StackPanel Grid.Column="0"
+                                    Grid.ColumnSpan="2"
                                     Grid.Row="3"
-                                    Height="65">
-                            <Label Content="Email"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="24"
-                                   FontFamily="{StaticResource Jost-ExtraLight}"
-                                   Margin="-5, -10, 0, -15" />
-                            <Label Content="sheryl.Hahn12@hotmail.com"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="30"
-                                   Margin="-5, 0, 0, 0"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                                    Orientation="Horizontal"
+                                    Margin="0, 10, 0, 20">
+                            <Border Height="100"
+                                    Width="100"
+                                    CornerRadius="50"
+                                    BorderBrush="{StaticResource WhiteBaseColor}"
+                                    BorderThickness="5"
+                                    Margin="0, 0, 15, 0">
+                                <Image Source="/Resources/avatar.png" />
+                            </Border>
+                            <Border Height="100"
+                                    Width="100"
+                                    CornerRadius="50"
+                                    BorderBrush="{StaticResource WhiteBaseColor}"
+                                    BorderThickness="5"
+                                    Margin="0, 0, 25, 0">
+                                <Image Source="/Resources/avatar.png" />
+                            </Border>
+                            <Border Height="100"
+                                    Width="100"
+                                    CornerRadius="50"
+                                    BorderBrush="{StaticResource WhiteBaseColor}"
+                                    BorderThickness="5"
+                                    Margin="0, 0, 25, 0">
+                                <Image Source="/Resources/avatar.png" />
+                            </Border>
+                            <Border Height="100"
+                                    Width="100"
+                                    CornerRadius="50"
+                                    BorderBrush="{StaticResource WhiteBaseColor}"
+                                    BorderThickness="5">
+                                <Image Source="/Resources/avatar.png" />
+                            </Border>
                         </StackPanel>
-                        <StackPanel Grid.Column="1"
-                                    Grid.Row="3"
-                                    Height="65">
-                            <Label Content="Номер телефона"
-                                   Foreground="{StaticResource BlackBaseColor}"
+                        <Grid Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Content="ПРОЙДЕНО 15 ИЗ 47 УРОКОВ"
                                    HorizontalContentAlignment="Left"
-                                   FontSize="24"
-                                   FontFamily="{StaticResource Jost-ExtraLight}"
-                                   Margin="-5, -10, 0, -15" />
-                            <Label Content="+799926453417"
-                                   Foreground="{StaticResource BlackBaseColor}"
-                                   HorizontalContentAlignment="Left"
-                                   FontSize="30"
-                                   Margin="-5, 0, 0, 0"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
-                        </StackPanel>
+                                   FontSize="18"
+                                   FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
+                            <Label Grid.Column="2"
+                                   Content="ПОСЛЕДНИЙ ВХОД: 2025.02.15 20:30"
+                                   HorizontalContentAlignment="Right"
+                                   FontSize="18"
+                                   FontFamily="{StaticResource YsabeauInfant-ExtraLight}" />
+                        </Grid>
                     </Grid>
-                </Border>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+                </Grid>
+            </Border>
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="2"
+                    Height="380"
+                    CornerRadius="16, 16, 0, 0"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource LightBaseColor}"
+                    Background="{StaticResource WhiteBaseColor}">
+                <Grid Margin="50, 30, 50, 30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Grid.Row="0"
+                               Text="Персональная информация"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalAlignment="Left"
+                               FontSize="30"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Background="Transparent">
+                        <Label Content="Изменить"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               FontSize="24"
+                               FontFamily="{StaticResource Jost-ExtraLight}" />
+                        <Path Data="M22 21.6558C22 21.7471 21.9639 21.8347 21.8997 21.8992C21.8354 21.9637 21.7483 22 21.6574 22H0.343235C0.298009 22 0.253234 21.991 0.211491 21.9735C0.169747 21.956 0.131864 21.9304 0.100025 21.8981L0.0979691 21.8968L0.093174 21.8885C0.0590179 21.8498 0.0339616 21.804 0.0198669 21.7543C0.0152996 21.7387 0.0121018 21.7228 0.0102749 21.7068C0.00753448 21.6896 0 21.6744 0 21.6565C0 21.629 0.00959069 21.6049 0.0157566 21.5794C0.0178119 21.5698 0.0137006 21.5602 0.0171261 21.5505L2.18205 14.8636C2.19876 14.812 2.22741 14.765 2.26563 14.7266L13.9925 2.94413C14.0049 2.92486 14.0138 2.90421 14.0302 2.887L16.5918 0.313408C16.7921 0.112705 17.0635 0 17.3464 0C17.6294 0 17.9007 0.112705 18.1011 0.313408L21.6876 3.91671C21.889 4.11908 22 4.3882 22 4.67454C22 4.96088 21.889 5.2307 21.6876 5.43306L19.1829 7.94952C19.1705 7.96811 19.1623 7.98944 19.1459 8.00596L7.43747 19.8483C7.3971 19.8892 7.34716 19.9193 7.29223 19.9358L2.69314 21.3124H21.6574C21.7482 21.3124 21.8352 21.3485 21.8994 21.4129C21.9636 21.4773 21.9998 21.5647 22 21.6558ZM17.6414 6.98245L6.89418 17.6416L7.28949 19.0196L18.419 7.76368L17.6414 6.98245ZM6.36871 17.1963L17.1577 6.4965L15.4881 4.81909L4.79572 15.5898V17.1963H6.36871ZM4.36889 15.0453L15.0037 4.33245L14.2919 3.6173L3.18572 14.7755L4.36889 15.0453ZM6.25087 17.8846H4.45316C4.36231 17.8846 4.27518 17.8483 4.21094 17.7838C4.1467 17.7193 4.11061 17.6317 4.11061 17.5404V15.6923L2.73561 15.3785L0.870079 21.1396L6.68523 19.3989L6.25087 17.8846ZM21.3149 4.67454C21.3149 4.57198 21.2752 4.47631 21.2032 4.40335L17.6167 0.800043C17.5449 0.728378 17.4477 0.688161 17.3464 0.688161C17.2452 0.688161 17.148 0.728378 17.0762 0.800043L14.766 3.12103L18.8924 7.26672L21.2025 4.94574C21.2383 4.91033 21.2667 4.86811 21.286 4.82153C21.3053 4.77496 21.3151 4.72499 21.3149 4.67454Z"
+                              Fill="{StaticResource DarkBaseColor}"
+                              VerticalAlignment="Center"
+                              Margin="10, 0, 0, 0" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="0"
+                                Grid.Row="2"
+                                Height="65"
+                                Margin="0, 30, 0, 40">
+                        <Label Content="Фамилия"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="20"
+                               FontFamily="{StaticResource Jost-ExtraLight}"
+                               Margin="-5, -10, 0, -15" />
+                        <Label Content="Lindgren"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="24"
+                               Margin="-5, 0, 0, 0"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="2"
+                                Height="65">
+                        <Label Content="Имя"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="20"
+                               FontFamily="{StaticResource Jost-ExtraLight}"
+                               Margin="-5, -10, 0, -15" />
+                        <Label Content="Ari"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="24"
+                               Margin="-5, 0, 0, 0"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="0"
+                                Grid.Row="3"
+                                Height="65">
+                        <Label Content="Email"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="20"
+                               FontFamily="{StaticResource Jost-ExtraLight}"
+                               Margin="-5, -10, 0, -15" />
+                        <Label Content="sheryl.Hahn12@hotmail.com"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="24"
+                               Margin="-5, 0, 0, 0"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="3"
+                                Height="65">
+                        <Label Content="Номер телефона"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="20"
+                               FontFamily="{StaticResource Jost-ExtraLight}"
+                               Margin="-5, -10, 0, -15" />
+                        <Label Content="+799926453417"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               HorizontalContentAlignment="Left"
+                               FontSize="24"
+                               Margin="-5, 0, 0, 0"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                Grid.Row="4"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                Margin="0, 30, 0, 0"
+                                Background="Transparent"
+                                PreviewMouseLeftButtonDown="GoOut">
+                        <Label Content="Выйти"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               FontSize="24"
+                               FontFamily="{StaticResource Jost-ExtraLight}" />
+                        <Path Data="M10.5189 1.15155L10.648 0.412733L10.6478 0.412695L10.5189 1.15155ZM12.6548 1.52463L12.5257 2.26344L12.526 2.2635L12.6548 1.52463ZM16.5982 2.9033L17.1814 2.43163L17.1811 2.4313L16.5982 2.9033ZM16.5992 17.097L17.1817 17.5694L17.1826 17.5682L16.5992 17.097ZM12.6538 18.4765L12.7827 19.2154L12.7828 19.2154L12.6538 18.4765ZM10.5198 18.8487L10.6487 19.5876L10.6487 19.5876L10.5198 18.8487ZM9.75 9.08347C9.75 8.66925 9.41421 8.33347 9 8.33347C8.58579 8.33347 8.25 8.66925 8.25 9.08347H9.75ZM8.25 10.9168C8.25 11.331 8.58579 11.6668 9 11.6668C9.41421 11.6668 9.75 11.331 9.75 10.9168H8.25ZM6.25 2.37513H5.33333V3.87513H6.25V2.37513ZM5.33333 2.37513C4.27423 2.37513 3.40438 2.37354 2.71868 2.46569C2.01149 2.56072 1.38882 2.76765 0.89067 3.2658L1.95133 4.32646C2.12418 4.15361 2.37739 4.02504 2.91846 3.95232C3.48104 3.87672 4.23185 3.87513 5.33333 3.87513V2.37513ZM0.89067 3.2658C0.392522 3.76395 0.185594 4.38662 0.090557 5.09381C-0.0015913 5.77951 0 6.64936 0 7.70846H1.5C1.5 6.60698 1.50159 5.85617 1.57719 5.29359C1.64991 4.75251 1.77848 4.49931 1.95133 4.32646L0.89067 3.2658ZM0 7.70846V12.2918H1.5V7.70846H0ZM0 12.2918C0 13.3509 -0.00159189 14.2205 0.0905595 14.9061C0.185619 15.6134 0.392567 16.2357 0.890308 16.7341L1.95169 15.6742C1.77843 15.5007 1.64988 15.2471 1.57719 14.7063C1.50159 14.1439 1.5 13.3933 1.5 12.2918H0ZM0.890308 16.7341C1.38857 17.233 2.01152 17.44 2.71882 17.5349C3.40448 17.627 4.27443 17.6251 5.33333 17.6251V16.1251C4.23165 16.1251 3.48093 16.1238 2.91833 16.0483C2.37736 15.9757 2.12443 15.8471 1.95169 15.6742L0.890308 16.7341ZM5.33333 17.6251H6.25V16.1251H5.33333V17.6251ZM7 4.93646C7 3.86359 7.00164 3.13572 7.07421 2.60051C7.14456 2.08168 7.26562 1.88488 7.39572 1.76951L6.40045 0.647254C5.88246 1.10663 5.67948 1.72291 5.58781 2.39896C5.49836 3.05862 5.5 3.90742 5.5 4.93646H7ZM7.39572 1.76951C7.51918 1.66001 7.70671 1.57251 8.18957 1.5846C8.69728 1.59732 9.37558 1.71349 10.3901 1.8904L10.6478 0.412695C9.68042 0.244015 8.87234 0.101232 8.22712 0.0850729C7.55704 0.0682909 6.92507 0.181995 6.40045 0.647254L7.39572 1.76951ZM10.3899 1.89036L12.5257 2.26344L12.7838 0.785816L10.648 0.412733L10.3899 1.89036ZM12.526 2.2635C13.6429 2.45804 14.4092 2.59314 14.982 2.77156C15.5319 2.94286 15.8162 3.12933 16.0154 3.37529L17.1811 2.4313C16.7285 1.87243 16.1384 1.56069 15.4281 1.33943C14.7406 1.12528 13.8611 0.973464 12.7835 0.785755L12.526 2.2635ZM16.0151 3.37497C16.2174 3.62509 16.351 3.96045 16.4238 4.57041C16.4988 5.19861 16.5 6.01942 16.5 7.20246H18C18 6.05626 18.0012 5.13036 17.9133 4.39273C17.8231 3.63685 17.6308 2.98725 17.1814 2.43163L16.0151 3.37497ZM16.5 7.20246V12.7987H18V7.20246H16.5ZM16.5 12.7987C16.5 13.9813 16.4988 14.8019 16.4239 15.4301C16.3512 16.0401 16.2178 16.3755 16.0157 16.6257L17.1826 17.5682C17.6314 17.0126 17.8233 16.3632 17.9134 15.6075C18.0012 14.8701 18 13.9445 18 12.7987H16.5ZM16.0166 16.6246C15.817 16.8707 15.5321 17.0573 14.9816 17.2288C14.4084 17.4074 13.6418 17.5427 12.5248 17.7377L12.7828 19.2154C13.8604 19.0272 14.7401 18.8752 15.4278 18.6609C16.1382 18.4396 16.7287 18.128 17.1817 17.5694L16.0166 16.6246ZM12.525 17.7377L10.391 18.1099L10.6487 19.5876L12.7827 19.2154L12.525 17.7377ZM10.391 18.1099C9.3765 18.2868 8.6982 18.4029 8.19048 18.4157C7.70763 18.4277 7.52009 18.3402 7.39663 18.2308L6.40137 19.353C6.92599 19.8183 7.55796 19.932 8.22804 19.9152C8.87326 19.899 9.68134 19.7562 10.6487 19.5876L10.391 18.1099ZM7.39663 18.2308C7.26636 18.1152 7.14517 17.9182 7.07463 17.3995C7.00187 16.8644 7 16.1365 7 15.0638H5.5C5.5 16.093 5.49859 16.9418 5.58831 17.6016C5.68025 18.2777 5.88355 18.8938 6.40137 19.353L7.39663 18.2308ZM7 15.0638V4.93646H5.5V15.0638H7ZM8.25 9.08347V10.9168H9.75V9.08347H8.25Z"
+                              Fill="{StaticResource DarkBaseColor}"
+                              VerticalAlignment="Center"
+                              Margin="10, 0, 0, 0" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </Page>
