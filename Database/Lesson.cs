@@ -10,27 +10,26 @@
 namespace TempusVelit.Database
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Lesson
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lesson()
         {
-            this.ControlTask = new HashSet<ControlTask>();
-            this.UserLesson = new HashSet<UserLesson>();
+            this.ControlTasks = new ObservableCollection<ControlTask>();
+            this.UserLessons = new ObservableCollection<UserLesson>();
         }
     
         public int LessonID { get; set; }
         public string LessonName { get; set; }
         public string Content { get; set; }
-        public int ModuleID { get; set; }
         public int OrderNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ControlTask> ControlTask { get; set; }
+        public virtual ObservableCollection<ControlTask> ControlTasks { get; set; }
         public virtual LearningModule LearningModule { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserLesson> UserLesson { get; set; }
+        public virtual ObservableCollection<UserLesson> UserLessons { get; set; }
     }
 }

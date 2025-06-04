@@ -4,17 +4,21 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:TempusVelit.Pages"
+      xmlns:assets="clr-namespace:TempusVelit.Assets"
       mc:Ignorable="d"
       d:DesignHeight="1500"
       d:DesignWidth="1440"
       Background="White">
-    <Grid Margin="50">
+    <Page.Resources>
+        <assets:AnswerHighlightToBackgroundConverter x:Key="AnswerHighlightToBackgroundConverter" />
+    </Page.Resources>
+    <Grid Margin="50, 20, 50, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0"
-                CornerRadius="16"
+                CornerRadius="16, 16, 16, 16"
                 BorderThickness="0"
                 Background="{StaticResource LightBaseColor}">
             <Grid Margin="50, 25">
@@ -76,68 +80,23 @@
                 Margin="0, 30, 0, 0"
                 BorderThickness="3"
                 BorderBrush="{StaticResource LightBaseColor}"
-                Background="{StaticResource WhiteBaseColor}"
-                Padding="50, 40">
+                Background="{StaticResource WhiteBaseColor}">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Border Grid.Column="0"
-                                Grid.Row="0"
-                                Background="{StaticResource LightBaseColor}"
-                                CornerRadius="10"
-                                Height="35"
-                                Width="40"
-                                Margin="0, 0, 10, 0">
-                            <TextBlock Text="01"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Foreground="{StaticResource DarkBaseColor}"
-                                       FontSize="26"
-                                       FontFamily="{StaticResource YsabeauInfant-Bold}" />
-                        </Border>
-                        <TextBlock Grid.Column="1"
-                                   Grid.Row="0"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource DarkBaseColor}"
-                                   Text="Необходимо пройти тестовые задания и набрать как можно больше баллов."
-                                   FontSize="25"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}" />
-                        <StackPanel Grid.Column="1"
-                                    Grid.Row="1">
-                            <StackPanel Orientation="Horizontal"
-                                        Margin="0, 15, 0, 0">
-                                <CheckBox Style="{DynamicResource CheckBoxStyle}"
-                                          Margin="0, 0, 15, 0"/>
-                                <TextBlock HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           Foreground="{StaticResource DarkBaseColor}"
-                                           Text="INSERT"
-                                           FontSize="23"
-                                           FontFamily="{StaticResource Jost-Light}" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
                     <ListView BorderThickness="0"
                               Background="Transparent"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
                               ScrollViewer.CanContentScroll="False"
-                              PreviewMouseWheel="ListViewPreviewMouseWheel">
+                              PreviewMouseWheel="ListViewPreviewMouseWheel"
+                              ItemsSource="{Binding FirstStageQuestions}"
+                              Padding="50, 40, 50, 20">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Stretch" />
                                 <Setter Property="Margin"
-                                        Value="0, 0, 0, 30" />
+                                        Value="0, 0, 0, 20" />
                                 <Setter Property="Template"
                                         Value="{StaticResource ListViewItemStyle}">
                                 </Setter>
@@ -145,11 +104,91 @@
                         </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Column="0"
+                                            Grid.Row="0"
+                                            Background="{StaticResource LightBaseColor}"
+                                            CornerRadius="10"
+                                            Height="35"
+                                            Width="40"
+                                            Margin="0, 0, 20, 0">
+                                        <TextBlock Text="{Binding OrderNumber}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource DarkBaseColor}"
+                                                   FontSize="26"
+                                                   FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                    </Border>
+                                    <TextBlock Grid.Column="1"
+                                               Grid.Row="0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               Text="{Binding QuestionText}"
+                                               TextWrapping="Wrap"
+                                               FontSize="25"
+                                               FontFamily="{StaticResource YsabeauInfant-Medium}" />
+                                    <ListView Grid.Column="1"
+                                              Grid.Row="1"
+                                              BorderThickness="0"
+                                              Background="Transparent"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                              ScrollViewer.CanContentScroll="False"
+                                              PreviewMouseWheel="ListViewPreviewMouseWheel"
+                                              ItemsSource="{Binding Answers}"
+                                              Margin="0, 15, 0, 0">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Stretch" />
+                                                <Setter Property="Margin"
+                                                        Value="0, 0, 0, 5" />
+                                                <Setter Property="Template"
+                                                        Value="{StaticResource ListViewItemStyle}">
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <CheckBox Style="{DynamicResource CheckBoxStyle}"
+                                                              Margin="0, 0, 15, 0"
+                                                              IsChecked="{Binding IsSelected}"
+                                                              IsEnabled="{Binding IsEnabled}"
+                                                              Foreground="{StaticResource LightBaseColor}">
+                                                        <CheckBox.Background>
+                                                            <MultiBinding Converter="{StaticResource AnswerHighlightToBackgroundConverter}">
+                                                                <Binding Path="IsNeedToHightlight" />
+                                                                <Binding Path="IsCorrect" />
+                                                            </MultiBinding>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                    <TextBlock HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="{StaticResource DarkBaseColor}"
+                                                               Text="{Binding AnswerText}"
+                                                               TextWrapping="Wrap"
+                                                               FontSize="23"
+                                                               FontFamily="{StaticResource Jost-Light}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Grid Margin="0, 50, 0, 30">
+                    <Grid x:Name="notDonePanel"
+                          Margin="50, 0, 50, 40">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -211,6 +250,110 @@
                             </Grid>
                         </StackPanel>
                     </Grid>
+                    <Border Grid.Row="1"
+                            x:Name="donePanel"
+                            Visibility="Collapsed"
+                            CornerRadius="16, 16, 0, 0"
+                            BorderThickness="3"
+                            BorderBrush="{StaticResource LightBaseColor}"
+                            Background="{StaticResource WhiteBaseColor}"
+                            Padding="50, 20"
+                            VerticalAlignment="Bottom"
+                            Margin="-3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="0, 0, 30, 0">
+                                <TextBlock Text="СЧЕТ"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="0, 0, 20, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock x:Name="tbCounter"
+                                               Text="00"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="ЗАТРАЧЕННОЕ ВРЕМЯ"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="0, 0, 20, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock Text="{Binding Text, ElementName=tbMin}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                                <TextBlock Text=":"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="7, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock Text="{Binding Text, ElementName=tbSec}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                            </StackPanel>
+                            <Border Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    BorderThickness="3"
+                                    BorderBrush="{StaticResource LightBaseColor}"
+                                    Height="70"
+                                    CornerRadius="16"
+                                    Background="Transparent"
+                                    PreviewMouseLeftButtonDown="OpenNextStage">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="Black"
+                                                      BlurRadius="10"
+                                                      Opacity="0.25"
+                                                      Direction="310" />
+                                </Border.Effect>
+                                <Border Background="{DynamicResource WhiteBaseColor}"
+                                        CornerRadius="14"
+                                        Padding="15,0">
+                                    <Label Content="Следующий этап"
+                                           Foreground="{StaticResource NormalBaseColor}"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           FontSize="30"
+                                           FontFamily="{DynamicResource YsabeauInfant-Medium}" />
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </Border>
                 </StackPanel>
             </ScrollViewer>
         </Border>

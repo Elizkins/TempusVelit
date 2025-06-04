@@ -9,6 +9,12 @@
       d:DesignHeight="1024"
       d:DesignWidth="1440"
       Background="White">
+    <Page.Resources>
+        <assets:PointCountToWidthConverter x:Key="PointCountToWidthConverter" />
+        <assets:PointCountToRattingConverter x:Key="PointCountToRattingConverter" />
+        <assets:GreyFormatConverter x:Key="GreyFormatConverter" />
+        <assets:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -50,10 +56,9 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <!--{Binding Points, StringFormat='{}{0} из 50'}-->
                                 <TextBlock Grid.Row="0"
                                            Grid.Column="0"
-                                           Text="69 из 100"
+                                           Text="{Binding LevelPoints, StringFormat='{}{0} из 100'}"
                                            FontSize="16"
                                            FontFamily="{StaticResource YsabeauInfant-Bold}"
                                            HorizontalAlignment="Left"
@@ -64,22 +69,28 @@
                                       VerticalAlignment="Top"
                                       HorizontalAlignment="Stretch"
                                       Margin="0, 5, 15, 0">
-                                    <Border x:Name="FullBox"
+                                    <Border x:Name="baseBorder"
                                             CornerRadius="3"
                                             Background="{StaticResource WhiteBaseColor}"
                                             Height="7"
                                             HorizontalAlignment="Stretch" />
-                                    <!--{Binding Points, Converter={StaticResource LevelProgressConverter}}-->
                                     <Border CornerRadius="3"
                                             Background="{StaticResource NormalBaseColor}"
                                             Height="7"
-                                            HorizontalAlignment="Left"
-                                            Width="200" />
+                                            HorizontalAlignment="Left">
+                                        <Border.Width>
+                                            <MultiBinding Converter="{StaticResource PointCountToWidthConverter}">
+                                                <Binding Path="." />
+                                                <Binding ElementName="baseBorder"
+                                                         Path="ActualWidth" />
+                                            </MultiBinding>
+                                        </Border.Width>
+                                    </Border>
                                 </Grid>
                                 <TextBlock Grid.Row="0"
                                            Grid.RowSpan="2"
                                            Grid.Column="1"
-                                           Text="3"
+                                           Text="{Binding Level}"
                                            FontSize="40"
                                            Margin="0, -10, 0, 0"
                                            FontFamily="{StaticResource YsabeauInfant-Bold}"
@@ -111,37 +122,69 @@
                             </Grid>
                         </StackPanel>
                     </Border>
-                    <StackPanel Grid.Row="1"
-                                Margin="0,15,0,0">
-                        <TextBlock Text="Гуру SQL"
-                                   TextWrapping="Wrap"
-                                   TextAlignment="Center"
-                                   FontSize="20"
-                                   FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{StaticResource DarkBaseColor}" />
-
-                        <Grid Margin="0, 20, 0, 15">
-                            <Image Source="/Resources/ellipse_1.png"
-                                   Stretch="Uniform"
-                                   Height="150"
-                                   VerticalAlignment="Stretch">
-                            </Image>
-                            <!--<Image Source="{Binding Icon}"
-                                   Stretch="Uniform"
-                                   Visibility="{Binding IsReceived, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                   Height="110"
-                                   VerticalAlignment="Stretch" />-->
-                        </Grid>
-                        <TextBlock Text="ПРОЙДИТЕ МОДУЛЬ 1 НА 100%"
-                                   TextWrapping="Wrap"
-                                   TextAlignment="Center"
-                                   Width="170"
-                                   FontSize="16"
-                                   FontFamily="{StaticResource Jost-ExtraLight}"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{StaticResource DarkBaseColor}" />
-                    </StackPanel>
+                    <ListView x:Name="lvAch"
+                              Grid.Row="1"
+                              BorderThickness="0"
+                              Background="Transparent"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                              ScrollViewer.CanContentScroll="False"
+                              PreviewMouseWheel="ListViewPreviewMouseWheel">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                                <Setter Property="Margin"
+                                        Value="30, 20" />
+                                <Setter Property="Template"
+                                        Value="{StaticResource ListViewItemStyle}">
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"
+                                           HorizontalAlignment="Center" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,15,0,0">
+                                    <TextBlock Text="{Binding AchievementName}"
+                                               TextWrapping="Wrap"
+                                               Height="50"
+                                               MaxWidth="190"
+                                               LineHeight="10"
+                                               TextAlignment="Center"
+                                               FontSize="20"
+                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}">
+                                    </TextBlock>
+                                    <Grid Margin="0, 20, 0, 15">
+                                        <Image Source="{Binding Image, Converter={StaticResource GreyFormatConverter}}"
+                                               Stretch="Uniform"
+                                               Height="150"
+                                               VerticalAlignment="Stretch">
+                                        </Image>
+                                        <Image Source="{Binding Image}"
+                                               Stretch="Uniform"
+                                               Visibility="{Binding ., Converter={StaticResource BooleanToVisibilityConverter}}"
+                                               Height="150"
+                                               VerticalAlignment="Stretch" />
+                                    </Grid>
+                                    <TextBlock Text="{Binding Description}"
+                                               TextWrapping="Wrap"
+                                               TextAlignment="Center"
+                                               Width="170"
+                                               FontSize="16"
+                                               FontFamily="{StaticResource Jost-ExtraLight}"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </ScrollViewer>
         </Border>
@@ -166,326 +209,164 @@
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Margin="0, 0, 0, 20" />
-                        <Grid VerticalAlignment="Top"
-                              Margin="0, 0, 0, 20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"
-                                  Margin="0, 0, 20, 0">
-                                <Ellipse Height="40"
-                                         Width="40"
-                                         Fill="{StaticResource NormalBaseColor}" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="1"
-                                           Foreground="{StaticResource WhiteBaseColor}"
-                                           FontSize="30"
-                                           FontFamily="{StaticResource YsabeauInfant-Black}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center" />
-                            </Grid>
-                            <Border Grid.Column="1"
-                                    CornerRadius="16"
-                                    BorderThickness="0"
-                                    Background="{StaticResource WhiteBaseColor}"
-                                    VerticalAlignment="Top">
-                                <Grid Margin="20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                               Grid.Row="0"
-                                               Text="Kristie Mann"
-                                               Foreground="{StaticResource BlackBaseColor}"
-                                               FontSize="26"
-                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="0"
-                                               Grid.Row="1"
-                                               Text="154 балла"
-                                               FontSize="20"
-                                               FontFamily="{StaticResource Jost-ExtraLight}"
-                                               VerticalAlignment="Center" />
-                                    <Border Grid.Column="1"
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            HorizontalAlignment="Right"
-                                            Height="100"
-                                            Width="100"
-                                            CornerRadius="60"
-                                            BorderBrush="{StaticResource LightBaseColor}"
-                                            BorderThickness="5">
-                                        <Image Source="/Resources/avatar.png" />
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                        <Grid VerticalAlignment="Top"
-                              Margin="0, 0, 0, 20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"
-                                  Margin="0, 0, 20, 0">
-                                <Ellipse Height="40"
-                                         Width="40"
-                                         Fill="{StaticResource NormalBaseColor}" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="1"
-                                           Foreground="{StaticResource WhiteBaseColor}"
-                                           FontSize="30"
-                                           FontFamily="{StaticResource YsabeauInfant-Black}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center" />
-                            </Grid>
-                            <Border Grid.Column="1"
-                                    CornerRadius="16"
-                                    BorderThickness="0"
-                                    Background="{StaticResource WhiteBaseColor}"
-                                    VerticalAlignment="Top">
-                                <Grid Margin="20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                               Grid.Row="0"
-                                               Text="Kristie Mann"
-                                               Foreground="{StaticResource BlackBaseColor}"
-                                               FontSize="26"
-                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="0"
-                                               Grid.Row="1"
-                                               Text="154 балла"
-                                               FontSize="20"
-                                               FontFamily="{StaticResource Jost-ExtraLight}"
-                                               VerticalAlignment="Center" />
-                                    <Border Grid.Column="1"
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            HorizontalAlignment="Right"
-                                            Height="100"
-                                            Width="100"
-                                            CornerRadius="60"
-                                            BorderBrush="{StaticResource LightBaseColor}"
-                                            BorderThickness="5">
-                                        <Image Source="/Resources/avatar.png" />
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                        <Grid VerticalAlignment="Top"
-                              Margin="0, 0, 0, 20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"
-                                  Margin="0, 0, 20, 0">
-                                <Ellipse Height="40"
-                                         Width="40"
-                                         Fill="{StaticResource NormalBaseColor}" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="1"
-                                           Foreground="{StaticResource WhiteBaseColor}"
-                                           FontSize="30"
-                                           FontFamily="{StaticResource YsabeauInfant-Black}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center" />
-                            </Grid>
-                            <Border Grid.Column="1"
-                                    CornerRadius="16"
-                                    BorderThickness="0"
-                                    Background="{StaticResource WhiteBaseColor}"
-                                    VerticalAlignment="Top">
-                                <Grid Margin="20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                               Grid.Row="0"
-                                               Text="Kristie Mann"
-                                               Foreground="{StaticResource BlackBaseColor}"
-                                               FontSize="26"
-                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="0"
-                                               Grid.Row="1"
-                                               Text="154 балла"
-                                               FontSize="20"
-                                               FontFamily="{StaticResource Jost-ExtraLight}"
-                                               VerticalAlignment="Center" />
-                                    <Border Grid.Column="1"
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            HorizontalAlignment="Right"
-                                            Height="100"
-                                            Width="100"
-                                            CornerRadius="60"
-                                            BorderBrush="{StaticResource LightBaseColor}"
-                                            BorderThickness="5">
-                                        <Image Source="/Resources/avatar.png" />
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                        <Grid VerticalAlignment="Top"
-                              Margin="0, 0, 0, 20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"
-                                  Margin="0, 0, 20, 0">
-                                <Ellipse Height="35"
-                                         Width="35"
-                                         Fill="{StaticResource DarkBaseColor}" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="4"
-                                           Foreground="{StaticResource WhiteBaseColor}"
-                                           FontSize="26"
-                                           FontFamily="{StaticResource YsabeauInfant-Black}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center" />
-                            </Grid>
-                            <Border Grid.Column="1"
-                                    CornerRadius="16"
-                                    BorderThickness="0"
-                                    Background="{StaticResource WhiteBaseColor}"
-                                    VerticalAlignment="Top">
-                                <Grid Margin="20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                               Text="Salvatore Doyle"
-                                               Foreground="{StaticResource BlackBaseColor}"
-                                               FontSize="24"
-                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="1"
-                                               Text="154 балла"
-                                               FontSize="16"
-                                               FontFamily="{StaticResource Jost-ExtraLight}"
-                                               VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
+                        <ListView x:Name="lvFirstUsers"
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                  ScrollViewer.CanContentScroll="False"
+                                  PreviewMouseWheel="ListViewPreviewMouseWheel">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Stretch" />
+                                    <Setter Property="Margin"
+                                            Value="0, 0, 0, 20" />
+                                    <Setter Property="Template"
+                                            Value="{StaticResource ListViewItemStyle}">
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Top">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0"
+                                              Margin="0, 0, 20, 0">
+                                            <Ellipse Height="40"
+                                                     Width="40"
+                                                     Fill="{StaticResource NormalBaseColor}" />
+                                            <TextBlock Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       Text="{Binding OrderNumber}"
+                                                       Foreground="{StaticResource WhiteBaseColor}"
+                                                       FontSize="30"
+                                                       FontFamily="{StaticResource YsabeauInfant-Black}"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center" />
+                                        </Grid>
+                                        <Border Grid.Column="1"
+                                                CornerRadius="16"
+                                                BorderThickness="0"
+                                                Background="{StaticResource WhiteBaseColor}"
+                                                VerticalAlignment="Top">
+                                            <Grid Margin="20">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                           Grid.Row="0"
+                                                           Text="{Binding .}"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           Foreground="{StaticResource BlackBaseColor}"
+                                                           FontSize="26"
+                                                           FontFamily="{StaticResource YsabeauInfant-Medium}"
+                                                           VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="0"
+                                                           Grid.Row="1"
+                                                           Text="{Binding PointCountString}"
+                                                           FontSize="20"
+                                                           FontFamily="{StaticResource Jost-ExtraLight}"
+                                                           VerticalAlignment="Center" />
+                                                <Border Grid.Column="1"
+                                                        Grid.Row="0"
+                                                        Grid.RowSpan="2"
+                                                        HorizontalAlignment="Right"
+                                                        Height="100"
+                                                        Width="100"
+                                                        CornerRadius="60"
+                                                        BorderBrush="{StaticResource LightBaseColor}"
+                                                        BorderThickness="5">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding Icon}"
+                                                                    Stretch="UniformToFill" />
+                                                    </Border.Background>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <ListView x:Name="lvLastUsers"
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                  ScrollViewer.CanContentScroll="False"
+                                  PreviewMouseWheel="ListViewPreviewMouseWheel">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Stretch" />
+                                    <Setter Property="Margin"
+                                            Value="0, 0, 0, 20" />
+                                    <Setter Property="Template"
+                                            Value="{StaticResource ListViewItemStyle}">
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Top">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0"
+                                              Margin="0, 0, 20, 0">
+                                            <Ellipse Height="35"
+                                                     Width="35"
+                                                     Fill="{StaticResource DarkBaseColor}" />
+                                            <TextBlock Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       Text="{Binding OrderNumber}"
+                                                       Foreground="{StaticResource WhiteBaseColor}"
+                                                       FontSize="26"
+                                                       FontFamily="{StaticResource YsabeauInfant-Black}"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center" />
+                                        </Grid>
+                                        <Border Grid.Column="1"
+                                                CornerRadius="16"
+                                                BorderThickness="0"
+                                                Background="{StaticResource WhiteBaseColor}"
+                                                VerticalAlignment="Top">
+                                            <Grid Margin="20">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                           Text="{Binding .}"
+                                                           Foreground="{StaticResource BlackBaseColor}"
+                                                           FontSize="24"
+                                                           FontFamily="{StaticResource YsabeauInfant-Medium}"
+                                                           VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding PointCountString}"
+                                                           FontSize="16"
+                                                           FontFamily="{StaticResource Jost-ExtraLight}"
+                                                           VerticalAlignment="Center" />
+                                            </Grid>
+                                        </Border>
 
-                        </Grid>
-                        <Grid VerticalAlignment="Top"
-                              Margin="0, 0, 0, 20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"
-                                  Margin="0, 0, 20, 0">
-                                <Ellipse Height="35"
-                                         Width="35"
-                                         Fill="{StaticResource DarkBaseColor}" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="4"
-                                           Foreground="{StaticResource WhiteBaseColor}"
-                                           FontSize="26"
-                                           FontFamily="{StaticResource YsabeauInfant-Black}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center" />
-                            </Grid>
-                            <Border Grid.Column="1"
-                                    CornerRadius="16"
-                                    BorderThickness="0"
-                                    Background="{StaticResource WhiteBaseColor}"
-                                    VerticalAlignment="Top">
-                                <Grid Margin="20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                               Text="Salvatore Doyle"
-                                               Foreground="{StaticResource BlackBaseColor}"
-                                               FontSize="24"
-                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="1"
-                                               Text="154 балла"
-                                               FontSize="16"
-                                               FontFamily="{StaticResource Jost-ExtraLight}"
-                                               VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-
-                        </Grid>
-                        <Grid VerticalAlignment="Top"
-                              Margin="0, 0, 0, 20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"
-                                  Margin="0, 0, 20, 0">
-                                <Ellipse Height="35"
-                                         Width="35"
-                                         Fill="{StaticResource DarkBaseColor}" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="4"
-                                           Foreground="{StaticResource WhiteBaseColor}"
-                                           FontSize="26"
-                                           FontFamily="{StaticResource YsabeauInfant-Black}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center" />
-                            </Grid>
-                            <Border Grid.Column="1"
-                                    CornerRadius="16"
-                                    BorderThickness="0"
-                                    Background="{StaticResource WhiteBaseColor}"
-                                    VerticalAlignment="Top">
-                                <Grid Margin="20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0"
-                                               Text="Salvatore Doyle"
-                                               Foreground="{StaticResource BlackBaseColor}"
-                                               FontSize="26"
-                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="1"
-                                               Text="154 балла"
-                                               FontSize="16"
-                                               FontFamily="{StaticResource Jost-ExtraLight}"
-                                               VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
                 </ScrollViewer>
-                <Border Grid.Row="1"
+                <Border x:Name="userPanel"
+                        Grid.Row="1"
                         Height="140"
                         Margin="3"
                         CornerRadius="13"
@@ -504,18 +385,21 @@
                                 CornerRadius="60"
                                 BorderBrush="{StaticResource LightBaseColor}"
                                 BorderThickness="5">
-                            <Image Source="/Resources/avatar.png" />
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Icon}"
+                                            Stretch="UniformToFill" />
+                            </Border.Background>
                         </Border>
 
                         <StackPanel Grid.Column="1"
                                     Margin="20, 0, 0, 0"
                                     VerticalAlignment="Center">
-                            <TextBlock Text="Kristie Mann"
+                            <TextBlock Text="{Binding .}"
                                        Foreground="{StaticResource BlackBaseColor}"
                                        FontSize="26"
                                        FontFamily="{StaticResource YsabeauInfant-Medium}"
                                        VerticalAlignment="Center" />
-                            <TextBlock Text="154 балла"
+                            <TextBlock Text="{Binding PointCountString}"
                                        FontSize="20"
                                        FontFamily="{StaticResource Jost-ExtraLight}"
                                        VerticalAlignment="Center" />
@@ -525,7 +409,7 @@
                             <Ellipse Height="50"
                                      Width="50"
                                      Fill="{StaticResource NormalBaseColor}" />
-                            <TextBlock Text="72"
+                            <TextBlock Text="{Binding ., Converter={StaticResource PointCountToRattingConverter}}"
                                        Foreground="{StaticResource WhiteBaseColor}"
                                        FontSize="30"
                                        FontFamily="{StaticResource YsabeauInfant-Black}"

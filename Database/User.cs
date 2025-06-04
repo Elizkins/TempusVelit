@@ -10,29 +10,28 @@
 namespace TempusVelit.Database
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.UserControlTask = new HashSet<UserControlTask>();
-            this.UserLesson = new HashSet<UserLesson>();
+            this.UserControlTasks = new ObservableCollection<UserControlTask>();
+            this.UserLessons = new ObservableCollection<UserLesson>();
+            this.UserAchievements = new ObservableCollection<UserAchievement>();
         }
     
         public int UserID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public string Phone { get; set; }
-        public string Icon { get; set; }
         public Nullable<System.DateTime> LastLoginDate { get; set; }
+        public int PointCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserControlTask> UserControlTask { get; set; }
+        public virtual ObservableCollection<UserControlTask> UserControlTasks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserLesson> UserLesson { get; set; }
+        public virtual ObservableCollection<UserLesson> UserLessons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ObservableCollection<UserAchievement> UserAchievements { get; set; }
     }
 }

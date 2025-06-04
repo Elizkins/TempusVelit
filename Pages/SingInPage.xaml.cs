@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TempusVelit.Assets;
+using TempusVelit.Database;
 
 namespace TempusVelit.Pages
 {
@@ -32,7 +34,18 @@ namespace TempusVelit.Pages
 
         private void CreateAccount(object sender, MouseButtonEventArgs e)
         {
-            
+            User user = new User
+            {
+                FirstName = $"User{TempusVelitData.Context.Users.Count()}",
+                LastName = "",
+                Email = emailEntry.Text,
+                PasswordHash = passwordEntry.Text,
+            };
+            TempusVelitData.Context.Users.Add(user);
+            TempusVelitData.Context.SaveChanges();
+
+            new DialogWindow(new Message("Ваш аккаун создан.", "", "ОК")).ShowDialog();
+            NavigationService.Navigate(new LogInPage());
         }
     }
 }

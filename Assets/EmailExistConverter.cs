@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using TempusVelit.Database;
+using TempusVelit.Pages;
 
 namespace TempusVelit.Assets
 {
@@ -14,13 +15,16 @@ namespace TempusVelit.Assets
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            string email = value?.ToString();
 
-            string email = value.ToString();
-            Debug.WriteLine(email);
+            if (MainPage.User?.Email == email)
+            {
+                return false;
+            }
 
             try
             {
-                return TempusVelitData.Context.User.Any(u => u.Email == email);
+                return TempusVelitData.Context.Users.Any(u => u.Email == email);
             }
             catch (Exception)
             {

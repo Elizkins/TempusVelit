@@ -4,25 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8dba0584d36c4cfc9a659c246554d98f" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="TempusVelitModel.Answer" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.ControlTask" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.LearningModule" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.Lesson" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.Question" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.Stage" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.UserControlTask" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TempusVelitModel.UserLesson" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <AssociationConnector Association="TempusVelitModel.FK__Answer__Question__412EB0B6" ManuallyRouted="false" />
+      <Diagram DiagramId="2d30234fbc1d425ea43638d0381e8344" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="TempusVelitModel.Answer" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.ControlTask" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.LearningModule" Width="1.5" PointX="1.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.Lesson" Width="1.5" PointX="1.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.Question" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.Stage" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.User" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.UserControlTask" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TempusVelitModel.UserLesson" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="TempusVelitModel.FK__Answer__Question__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="TempusVelitModel.FK__ControlTa__Lesso__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="TempusVelitModel.FK__Question__TaskID__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="TempusVelitModel.FK__UserContr__TaskI__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="TempusVelitModel.FK__Lesson__ModuleID__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="TempusVelitModel.FK__UserLesso__Lesso__31EC6D26" ManuallyRouted="false" />
-        <AssociationConnector Association="TempusVelitModel.FK__Question__StageI__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="TempusVelitModel.FK__Lesson__ModuleID__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="TempusVelitModel.FK__UserLesso__Lesso__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="TempusVelitModel.FK__Question__StageI__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="TempusVelitModel.FK_UserControlTask_Stage" ManuallyRouted="false" />
         <AssociationConnector Association="TempusVelitModel.FK__UserContr__UserI__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="TempusVelitModel.FK__UserLesso__UserI__30F848ED" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TempusVelitModel.Achievement" Width="1.5" PointX="8.625" PointY="4" />
+        <EntityTypeShape EntityType="TempusVelitModel.UserAchievement" Width="1.5" PointX="8.625" PointY="0.75" />
+        <AssociationConnector Association="TempusVelitModel.FK__UserAchie__Achie__619B8048" />
+        <AssociationConnector Association="TempusVelitModel.FK__UserAchie__UserI__60A75C0F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

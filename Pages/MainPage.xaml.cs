@@ -31,6 +31,9 @@ namespace TempusVelit.Pages
 
             User = user;
 
+            user.LastLoginDate = DateTime.Now;
+            TempusVelitData.Context.SaveChanges();
+
             navigationFrame.NavigationService.Navigate(new LearningModules());
 
             MenuControl.NavigationService = navigationFrame.NavigationService;

@@ -9,97 +9,338 @@
       d:DesignHeight="1000"
       d:DesignWidth="1440"
       Background="White">
-    <Grid Margin="50, 40, 50, 50">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
-                   Text="Доступные модули"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Left"
-                   Margin="35, 0, 0, 25"
-                   FontSize="36"
-                   FontFamily="{StaticResource YsabeauInfant-SemiBold}" />
-        <Border Grid.Row="1"
-                CornerRadius="16"
-                BorderThickness="0"
-                Background="{StaticResource LightBaseColor}">
-            <ListView x:Name="lvTasks"
-                      BorderThickness="0"
-                      Background="Transparent"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                      ScrollViewer.CanContentScroll="False"
-                      Margin="30,30, 30, 0"
-                      PreviewMouseWheel="ListViewPreviewMouseWheel">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch" />
-                        <Setter Property="Margin"
-                                Value="0, 0, 0, 30" />
-                        <Setter Property="Template"
-                                Value="{StaticResource ListViewItemStyle}">
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border CornerRadius="16"
-                                BorderThickness="0"
-                                Background="{StaticResource WhiteBaseColor}"
-                                VerticalAlignment="Top"
-                                PreviewMouseLeftButtonDown="OpenFirstStage">
-                            <Grid Margin="30">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="0"
-                                           Text="{Binding Lesson.LessonName}"
-                                           Foreground="{StaticResource BlackBaseColor}"
-                                           FontSize="30"
-                                           FontFamily="{StaticResource YsabeauInfant-Medium}"
-                                           Margin="0, 0, 0, 10" />
-                                <TextBlock Grid.Column="0"
-                                           Grid.Row="1"
-                                           FontSize="20"
-                                           FontFamily="{StaticResource Jost-ExtraLight}">
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0} модуль: Занятие {1}">
-                                            <Binding Path="Lesson.ModuleID" />
-                                            <Binding Path="Lesson.OrderNumber" />
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                                <StackPanel Grid.Column="1"
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Margin="0, 0, 0, 0">
-                                    <Grid>
-                                        <Path Data="M15.8704 29.655H18.0004L31.6804 15.975L29.5504 13.845L16.9504 26.475L11.1904 20.715L9.06042 22.845L15.8704 29.655Z"
-                                              Fill="{StaticResource LightBaseColor}" />
-                                        <Path Data="M22.8604 0.045C27.6604 0.345 32.1604 2.745 35.4604 6.045C39.3604 10.245 41.4604 15.345 41.4604 21.345C41.4604 26.145 39.6604 30.645 36.6604 34.545C33.6604 38.145 29.4604 40.845 24.6604 41.745C19.8604 42.645 15.0604 42.045 10.8604 39.645C6.66042 37.245 3.36042 33.645 1.56042 29.145C-0.239583 24.645 -0.539583 19.545 0.960417 15.045C2.46042 10.245 5.16042 6.345 9.36042 3.645C13.2604 0.945 18.0604 -0.255 22.8604 0.045ZM24.3604 38.745C28.2604 37.845 31.8604 35.745 34.5604 32.445C36.9604 29.145 38.4604 25.245 38.1604 21.045C38.1604 16.245 36.3604 11.445 33.0604 8.145C30.0604 5.145 26.4604 3.345 22.2604 3.045C18.3604 2.745 14.1604 3.645 10.8604 6.045C7.56042 8.445 5.16042 11.745 3.96042 15.945C2.76042 19.845 2.76042 24.045 4.56042 27.945C6.36042 31.845 9.06042 34.845 12.6604 36.945C16.2604 39.045 20.4604 39.645 24.3604 38.745Z"
-                                              Fill="{StaticResource LightBaseColor}" />
-                                    </Grid>
-                                    <TextBlock Text="43%"
-                                               FontSize="24"
-                                               FontFamily="{StaticResource Jost-Medium}"
-                                               Foreground="{StaticResource LightBaseColor}" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+    <Page.Resources>
+        <assets:TaskToProcentConverter x:Key="ProcentConverter" />
+        <assets:TaskToColorConverter x:Key="ColorConverter" />
+    </Page.Resources>
+    <Grid>
+        <Grid Margin="50, 40, 50, 50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="Доступные модули"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="35, 0, 0, 25"
+                       FontSize="36"
+                       FontFamily="{StaticResource YsabeauInfant-SemiBold}" />
+            <Border Grid.Row="1"
+                    CornerRadius="16"
+                    BorderThickness="0"
+                    Background="{StaticResource LightBaseColor}">
+                <ListView x:Name="lvTasks"
+                          BorderThickness="0"
+                          Background="Transparent"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ScrollViewer.CanContentScroll="False"
+                          Margin="30,30, 30, 0"
+                          PreviewMouseWheel="ListViewPreviewMouseWheel">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
+                            <Setter Property="Margin"
+                                    Value="0, 0, 0, 30" />
+                            <Setter Property="Template"
+                                    Value="{StaticResource ListViewItemStyle}">
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="16"
+                                    BorderThickness="0"
+                                    Background="{StaticResource WhiteBaseColor}"
+                                    VerticalAlignment="Top"
+                                    PreviewMouseLeftButtonDown="OpenFirstStage">
+                                <Grid Margin="30">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                               Grid.Row="0"
+                                               Text="{Binding Lesson.LessonName}"
+                                               Foreground="{StaticResource BlackBaseColor}"
+                                               FontSize="30"
+                                               FontFamily="{StaticResource YsabeauInfant-Medium}"
+                                               Margin="0, 0, 0, 10" />
+                                    <TextBlock Grid.Column="0"
+                                               Grid.Row="1"
+                                               FontSize="20"
+                                               FontFamily="{StaticResource Jost-ExtraLight}">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} модуль: Занятие {1}">
+                                                <Binding Path="Lesson.ModuleID" />
+                                                <Binding Path="Lesson.OrderNumber" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <StackPanel Grid.Column="1"
+                                                Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right"
+                                                Margin="0, 0, 0, 0"
+                                                Background="Transparent"
+                                                PreviewMouseLeftButtonDown="OpenResultPanel">
+                                        <Grid>
+                                            <Path Data="M15.8704 29.655H18.0004L31.6804 15.975L29.5504 13.845L16.9504 26.475L11.1904 20.715L9.06042 22.845L15.8704 29.655Z"
+                                                  Fill="{Binding ., Converter={StaticResource ColorConverter}}" />
+                                            <Path Data="M22.8604 0.045C27.6604 0.345 32.1604 2.745 35.4604 6.045C39.3604 10.245 41.4604 15.345 41.4604 21.345C41.4604 26.145 39.6604 30.645 36.6604 34.545C33.6604 38.145 29.4604 40.845 24.6604 41.745C19.8604 42.645 15.0604 42.045 10.8604 39.645C6.66042 37.245 3.36042 33.645 1.56042 29.145C-0.239583 24.645 -0.539583 19.545 0.960417 15.045C2.46042 10.245 5.16042 6.345 9.36042 3.645C13.2604 0.945 18.0604 -0.255 22.8604 0.045ZM24.3604 38.745C28.2604 37.845 31.8604 35.745 34.5604 32.445C36.9604 29.145 38.4604 25.245 38.1604 21.045C38.1604 16.245 36.3604 11.445 33.0604 8.145C30.0604 5.145 26.4604 3.345 22.2604 3.045C18.3604 2.745 14.1604 3.645 10.8604 6.045C7.56042 8.445 5.16042 11.745 3.96042 15.945C2.76042 19.845 2.76042 24.045 4.56042 27.945C6.36042 31.845 9.06042 34.845 12.6604 36.945C16.2604 39.045 20.4604 39.645 24.3604 38.745Z"
+                                                  Fill="{Binding ., Converter={StaticResource ColorConverter}}" />
+                                        </Grid>
+                                        <TextBlock Text="{Binding ., Converter={StaticResource ProcentConverter}}"
+                                                   FontSize="24"
+                                                   HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource Jost-Medium}"
+                                                   Foreground="{StaticResource LightBaseColor}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+        </Grid>
+        <Border x:Name="overlay"
+                Margin="50, 0"
+                Background="#C0FFFFFF"
+                Visibility="Collapsed">
+            <Border MaxHeight="560"
+                    Background="{StaticResource WhiteBaseColor}"
+                    BorderBrush="{StaticResource LightBaseColor}"
+                    BorderThickness="3"
+                    CornerRadius="16">
+                <Grid Margin="35, 25, 35, 25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="0"
+                               x:Name="titleBox"
+                               Foreground="{StaticResource BlackBaseColor}"
+                               FontSize="28"
+                               FontFamily="{StaticResource YsabeauInfant-SemiBold}"
+                               Margin="0, 0, 0, 20"/>
+                    <Border Grid.Column="1"
+                            Grid.Row="0"
+                            Padding="5, 0"
+                            Background="Transparent"
+                            PreviewMouseLeftButtonDown="CloseResultPanel">
+                        <Path Stretch="UniformToFill"
+                              Height="20"
+                              Width="20"
+                              VerticalAlignment="Center"
+                              Fill="{StaticResource NormalBaseColor}"
+                              Data="M6.846 32V25.154H0V23.154H8.846V32H6.846ZM23.192 32V23.154H32.038V25.154H25.192V32H23.192ZM0 8.846V6.846H6.846V0H8.846V8.846H0ZM23.192 8.846V0H25.192V6.846H32.038V8.846H23.192Z" />
+                    </Border>
+                    <StackPanel Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Grid.Column="0"
+                                    Grid.Row="0"
+                                    Background="{StaticResource LightBaseColor}"
+                                    CornerRadius="10"
+                                    Height="35"
+                                    Padding="15, 5"
+                                    Margin="0, 0, 20, 0">
+                                <TextBlock Text="1 этап"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="0"
+                                       Text="Тестирование"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="firstStack"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="1"
+                                   Text="{Binding Score, StringFormat='Правильно выполнено {0}/10 заданий'}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource DarkBaseColor}"
+                                   FontSize="26"
+                                   FontFamily="{StaticResource Jost-Light}" 
+                                   Margin="0, 20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Grid.Column="0"
+                                    Grid.Row="0"
+                                    Background="{StaticResource LightBaseColor}"
+                                    CornerRadius="10"
+                                    Height="35"
+                                    Padding="15, 5"
+                                    Margin="0, 0, 20, 0">
+                                <TextBlock Text="2 этап"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="0"
+                                       Text="Расширенное тестирование"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="secondStack"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="1"
+                                   Text="{Binding Score, StringFormat='Правильно выполнено {0}/5 заданий'}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource DarkBaseColor}"
+                                   FontSize="26"
+                                   FontFamily="{StaticResource Jost-Light}"
+                                   Margin="0, 20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Grid.Column="0"
+                                    Grid.Row="0"
+                                    Background="{StaticResource LightBaseColor}"
+                                    CornerRadius="10"
+                                    Height="35"
+                                    Padding="15, 5"
+                                    Margin="0, 0, 20, 0">
+                                <TextBlock Text="3 этап"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="0"
+                                       Text="Контрольное задание"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource DarkBaseColor}"
+                                       FontSize="26"
+                                       FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="thirdStack"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="1"
+                                   Text="{Binding Score, StringFormat='Запрос написан с использованием {0} попыток'}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource DarkBaseColor}"
+                                   FontSize="26"
+                                   FontFamily="{StaticResource Jost-Light}"
+                                   Margin="0, 20"/>
+                    </StackPanel>
+                    <Border Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            x:Name="donePanel"
+                            CornerRadius="16"
+                            BorderThickness="3"
+                            BorderBrush="{StaticResource LightBaseColor}"
+                            Background="{StaticResource WhiteBaseColor}"
+                            Padding="50, 40"
+                            VerticalAlignment="Bottom"
+                            Margin="-37, 0, -37, -27">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="0, 0, 30, 0">
+                                <TextBlock Text="СЧЕТ"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="0, 0, 20, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="55">
+                                    <TextBlock x:Name="tbCounter"
+                                               Text="00"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="ЗАТРАЧЕННОЕ ВРЕМЯ"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="0, 0, 20, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock x:Name="tbMin"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                                <TextBlock Text=":"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="7, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock x:Name="tbSec"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
         </Border>
     </Grid>
 </Page>

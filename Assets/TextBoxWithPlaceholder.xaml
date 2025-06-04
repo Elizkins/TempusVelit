@@ -15,7 +15,7 @@
         <Border.Style>
             <Style TargetType="Border">
                 <Setter Property="BorderBrush"
-                        Value="{Binding Color,  UpdateSourceTrigger=PropertyChanged}" />
+                        Value="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Text.Length, ElementName=entry}"
                                  Value="0">
@@ -31,13 +31,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Path Grid.Column="0"
-                  Data="{Binding Icon}"
+                  Data="{Binding Icon, RelativeSource={RelativeSource AncestorType=UserControl}}"
                   VerticalAlignment="Center"
                   Margin="0, 0, 20, 0">
                 <Path.Style>
                     <Style TargetType="Path">
                         <Setter Property="Fill"
-                                Value="{Binding Color,  UpdateSourceTrigger=PropertyChanged}" />
+                                Value="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text.Length, ElementName=entry}"
                                          Value="0">
@@ -49,17 +49,18 @@
                 </Path.Style>
             </Path>
             <TextBox x:Name="entry"
-                     Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="1"
                      FontSize="20"
                      FontFamily="{StaticResource YsabeauInfant-Medium}"
                      GotFocus="RemovePlaceholder"
                      LostFocus="AddPlaceholder"
+                     TextChanged="EntryTextChanged"
                      BorderThickness="0">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Setter Property="Foreground"
-                                Value="{Binding Color,  UpdateSourceTrigger=PropertyChanged}" />
+                                Value="{Binding Color, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text.Length, RelativeSource={RelativeSource Self}}"
                                          Value="0">
@@ -73,7 +74,7 @@
             <TextBlock x:Name="placeholder"
                        Grid.Column="1"
                        Foreground="{StaticResource DarkBaseColor}"
-                       Text="{Binding Placeholder}"
+                       Text="{Binding Placeholder, RelativeSource={RelativeSource AncestorType=UserControl}}"
                        Visibility="Visible"
                        FontSize="20"
                        FontFamily="{StaticResource YsabeauInfant-Medium}"

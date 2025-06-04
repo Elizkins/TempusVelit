@@ -34,6 +34,9 @@
                                                Text=""
                                                Color="{StaticResource NormalBaseColor}"
                                                Placeholder="Пароль"
+                                               PreviewTextInput="PasswordTextChanged"
+                                               PreviewKeyDown="TextBoxPreviewKeyDown"
+                                               TextChanged="EntryTextChanged"
                                                Icon="M7.88309 11.9889C6.17658 12.0851 4.62787 12.6549 3.7491 14.6848C3.64914 14.9163 3.40882 15.0569 3.12851 15.0569C2.65594 15.0569 1.19486 14.0252 0.778442 13.7761C0.778868 16.8467 2.39223 19.5455 6.22337 19.5455C9.45008 19.5455 11.6679 17.9135 11.6679 15.064C11.6679 14.948 11.6402 14.8373 11.6266 14.7236L7.88309 11.9889ZM20.2553 0.45459C19.6105 0.45459 19.006 0.704785 18.545 1.06796C9.85034 7.87655 8.94562 8.03651 8.94562 10.0407C8.94562 10.5515 9.08386 11.0385 9.31695 11.4837L12.0315 13.4666C12.3382 13.5337 12.6543 13.5796 12.9839 13.5796C15.6258 13.5796 17.157 11.8842 21.9656 4.01698C22.2795 3.48192 22.5569 2.90397 22.5569 2.30216C22.5569 1.22419 21.451 0.45459 20.2553 0.45459Z" />
                 <!--<PasswordBox Name="passwordBox"
                              Foreground="{StaticResource DarkBaseColor}"
@@ -149,9 +152,22 @@
                            Foreground="{StaticResource NormalBaseColor}"
                            MouseLeftButtonDown="OpenSingInPage" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Забыли пароль?"
+                           TextDecorations="Underline"
+                           FontSize="18"
+                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource DarkBaseColor}"
+                           Opacity="0.2"
+                           MouseLeftButtonDown="OpenPasswordPage"/>
+            </StackPanel>
             <Label Content="TEMPUS VELIT"
                    HorizontalContentAlignment="Center"
-                   Margin="0, 60"
+                   Margin="0, 12, 0, 60"
                    FontSize="40"
                    FontFamily="{StaticResource Jost-SemiBold}"
                    Foreground="{StaticResource LightBaseColor}" />

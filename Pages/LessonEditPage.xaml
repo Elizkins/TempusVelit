@@ -1,0 +1,268 @@
+﻿<Page x:Class="TempusVelit.Pages.LessonEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TempusVelit.Pages"
+      xmlns:assets="clr-namespace:TempusVelit.Assets"
+      mc:Ignorable="d"
+      d:DesignHeight="1024"
+      d:DesignWidth="1440"
+      Background="{StaticResource WhiteBaseColor}">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource YsabeauInfant-Medium}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource DarkBaseColor}" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource YsabeauInfant-Medium}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource DarkBaseColor}" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource DarkBaseColor}" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource Jost-Medium}" />
+            <Setter Property="Padding"
+                    Value="15, 10" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="FontSize"
+                    Value="16" />
+
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Border Background="{StaticResource LightBaseColor}"
+                Margin="50, 50"
+                CornerRadius="25">
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0, 30"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="Название:"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               Margin="0, 0, 20, 0"
+                               x:Name="namePlaceholder" />
+                    <Border BorderThickness="0"
+                            Background="{StaticResource WhiteBaseColor}"
+                            CornerRadius="13"
+                            Height="60"
+                            Width="700">
+                        <TextBox Background="Transparent"
+                                 x:Name="nameBox"
+                                 Text="{Binding LessonName}"
+                                 Margin="20, 0, 0, 0"
+                                 FontSize="26"
+                                 VerticalAlignment="Center"
+                                 BorderThickness="0" />
+                    </Border>
+                    <StackPanel VerticalAlignment="Center"
+                                Margin="20, 0">
+                        <StackPanel.Resources>
+                            <Style TargetType="RadioButton">
+                                <Setter Property="Foreground"
+                                        Value="{StaticResource DarkBaseColor}" />
+                                <Setter Property="FontFamily"
+                                        Value="{StaticResource Jost-Medium}" />
+                                <Setter Property="Padding"
+                                        Value="15, 10" />
+                                <Setter Property="BorderBrush"
+                                        Value="{StaticResource DarkBaseColor}" />
+                                <Setter Property="FontSize"
+                                        Value="12" />
+
+                            </Style>
+                        </StackPanel.Resources>
+                        <RadioButton x:Name="rb1Module"
+                                     GroupName="moduleGroup"
+                                     Content="Модуль 1" />
+                        <RadioButton  x:Name="rb2Module"
+                                      GroupName="moduleGroup"
+                                      Content="Модуль 2" />
+                        <RadioButton x:Name="rb3Module"
+                                     GroupName="moduleGroup"
+                                     Content="Модуль 3" />
+                    </StackPanel>
+                    <Border CornerRadius="16" Background="{StaticResource WhiteBaseColor}">
+                        <Button Content="Контрольное задание"
+                                Click="OpenControlTaskEditPage"
+                                Background="Transparent" />
+                    </Border>
+                </StackPanel>
+                <!--<ScrollViewer>
+                    <StackPanel x:Name="spContent"
+                                MaxHeight="500"
+                                Height="500"
+                                Margin="50, 0"
+                                Background="{StaticResource WhiteBaseColor}" />
+                </ScrollViewer>-->
+                <ListView Background="{StaticResource WhiteBaseColor}"
+                          Margin="50, 0"
+                          x:Name="lvContentList"
+                          BorderThickness="0"
+                          MaxHeight="500"
+                          HorizontalContentAlignment="Stretch"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.CanContentScroll="False">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform x:Name="Transform" />
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y"
+                                                             From="-20"
+                                                             To="0"
+                                                             Duration="0:0:0.3"
+                                                             DecelerationRatio="0.5" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0, 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Text}"
+                                         FontSize="27"
+                                         Grid.Column="0"
+                                         TextWrapping="Wrap"
+                                         Margin="20, 3, 0, 0"
+                                         BorderBrush="{StaticResource LightBaseColor}" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        Margin="10, 0"
+                                        CornerRadius="10"
+                                        Padding="5"
+                                        Grid.Column="1"
+                                        BorderThickness="0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch">
+                                    <ComboBox SelectedItem="{Binding Tag}"
+                                              Style="{DynamicResource ComboBoxStyle}"
+                                              ItemsSource="{Binding ContentTypes}"
+                                              Foreground="{StaticResource DarkBaseColor}"
+                                              FontSize="16"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Center"
+                                              BorderThickness="0">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}"
+                                                           FontSize="16"
+                                                           Margin="2" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Border>
+                                <Border Background="{StaticResource NormalBaseColor}"
+                                        Margin="5, 0"
+                                        CornerRadius="10"
+                                        Grid.Column="2"
+                                        BorderThickness="0"
+                                        Padding="10"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        PreviewMouseLeftButtonDown="DeleteTag">
+                                    <Path Data="M5 8.75H25M12.5 13.75V21.25M17.5 13.75V21.25M6.25 8.75L7.5 23.75C7.5 24.413 7.76339 25.0489 8.23223 25.5178C8.70107 25.9866 9.33696 26.25 10 26.25H20C20.663 26.25 21.2989 25.9866 21.7678 25.5178C22.2366 25.0489 22.5 24.413 22.5 23.75L23.75 8.75M11.25 8.75V5C11.25 4.66848 11.3817 4.35054 11.6161 4.11612C11.8505 3.8817 12.1685 3.75 12.5 3.75H17.5C17.8315 3.75 18.1495 3.8817 18.3839 4.11612C18.6183 4.35054 18.75 4.66848 18.75 5V8.75"
+                                          StrokeThickness="2.5"
+                                          Width="20"
+                                          Stretch="Uniform"
+                                          Stroke="{StaticResource WhiteBaseColor}"
+                                          StrokeStartLineCap="Round"
+                                          StrokeLineJoin="Round" />
+                                </Border>
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Margin="5, 0"
+                                        Grid.Column="3"
+                                        BorderThickness="0"
+                                        Padding="10"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        PreviewMouseLeftButtonDown="RaiseTag">
+                                    <Path Data="M9.88375 0.544999C9.64934 0.31066 9.33146 0.179016 9 0.179016C8.66855 0.179016 8.35066 0.31066 8.11625 0.544999L1.045 7.61625C0.925614 7.73156 0.830386 7.86949 0.764875 8.02199C0.699363 8.1745 0.664881 8.33852 0.663438 8.5045C0.661996 8.67047 0.693624 8.83507 0.756475 8.98869C0.819326 9.14231 0.912142 9.28188 1.02951 9.39924C1.14687 9.51661 1.28644 9.60942 1.44006 9.67228C1.59368 9.73513 1.75828 9.76676 1.92425 9.76531C2.09023 9.76387 2.25425 9.72939 2.40676 9.66388C2.55926 9.59837 2.69719 9.50314 2.8125 9.38375L7.75 4.44625V21C7.75 21.3315 7.8817 21.6495 8.11612 21.8839C8.35054 22.1183 8.66848 22.25 9 22.25C9.33152 22.25 9.64946 22.1183 9.88388 21.8839C10.1183 21.6495 10.25 21.3315 10.25 21V4.44625L15.1875 9.38375C15.4233 9.61145 15.739 9.73744 16.0668 9.73459C16.3945 9.73174 16.708 9.60028 16.9398 9.36852C17.1715 9.13676 17.303 8.82325 17.3058 8.4955C17.3087 8.16775 17.1827 7.852 16.955 7.61625L9.88375 0.544999Z"
+                                          Width="20"
+                                          Fill="{StaticResource NormalBaseColor}"
+                                          Stretch="Uniform" />
+                                </Border>
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Margin="5, 0"
+                                        Grid.Column="4"
+                                        BorderThickness="0"
+                                        Padding="10"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        PreviewMouseLeftButtonDown="LowerTag">
+                                    <Path Data="M8.11625 22.455C8.35066 22.6893 8.66854 22.821 9 22.821C9.33145 22.821 9.64934 22.6893 9.88375 22.455L16.955 15.3838C17.0744 15.2684 17.1696 15.1305 17.2351 14.978C17.3006 14.8255 17.3351 14.6615 17.3366 14.4955C17.338 14.3295 17.3064 14.1649 17.2435 14.0113C17.1807 13.8577 17.0879 13.7181 16.9705 13.6008C16.8531 13.4834 16.7136 13.3906 16.5599 13.3277C16.4063 13.2649 16.2417 13.2332 16.0757 13.2347C15.9098 13.2361 15.7457 13.2706 15.5932 13.3361C15.4407 13.4016 15.3028 13.4969 15.1875 13.6163L10.25 18.5538V2C10.25 1.66848 10.1183 1.35054 9.88388 1.11612C9.64946 0.881697 9.33152 0.750001 9 0.750001C8.66848 0.750001 8.35054 0.881697 8.11612 1.11612C7.88169 1.35054 7.75 1.66848 7.75 2V18.5538L2.8125 13.6163C2.57674 13.3886 2.26099 13.2626 1.93325 13.2654C1.6055 13.2683 1.29199 13.3997 1.06023 13.6315C0.828465 13.8632 0.697003 14.1768 0.694155 14.5045C0.691307 14.8322 0.8173 15.148 1.045 15.3838L8.11625 22.455Z"
+                                          Width="20"
+                                          Fill="{StaticResource NormalBaseColor}"
+                                          Stretch="Uniform" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="16, 16, 0, 0"
+                Margin="0, 0, 0, 50"
+                VerticalAlignment="Bottom"
+                Background="{StaticResource WhiteBaseColor}"
+                HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Добавить заголовок"
+                        Click="AddH1Click" />
+                <Button Content="Добавить акцент"
+                        Click="AddH2Click" />
+                <Button Content="Добавить текст"
+                        Click="AddH3Click" />
+                <Button Content="Добавить SQL запрос"
+                        Click="AddSqlExampleClick" />
+                <Button Content="Добавить изображение"
+                        Click="AddImageClick" />
+                <Button Content="Предпоказ"
+                        Click="PreviewClick" />
+                <Button Content="Сохранить"
+                        Click="SaveClick" />
+            </StackPanel>
+        </Border>
+        <Border Padding="5, 0"
+                Margin="100"
+                Background="Transparent"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                PreviewMouseLeftButtonDown="GoBack">
+            <Path Stretch="UniformToFill"
+                  Height="20"
+                  Width="20"
+                  VerticalAlignment="Center"
+                  Fill="{StaticResource DarkBaseColor}"
+                  Data="M6.846 32V25.154H0V23.154H8.846V32H6.846ZM23.192 32V23.154H32.038V25.154H25.192V32H23.192ZM0 8.846V6.846H6.846V0H8.846V8.846H0ZM23.192 8.846V0H25.192V6.846H32.038V8.846H23.192Z" />
+        </Border>
+    </Grid>
+</Page>

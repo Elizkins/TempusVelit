@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TempusVelit.Assets;
 using TempusVelit.Database;
 
 namespace TempusVelit.Pages
@@ -25,11 +28,26 @@ namespace TempusVelit.Pages
     {
         private DispatcherTimer timer;
         private TimeSpan elapsedTime;
+        private ControlTask task;
 
         public FirstStagePage(ControlTask task)
         {
             InitializeComponent();
-            this.DataContext = task;
+
+            Question.OrderNumber = 0;
+
+            this.task = task;
+            foreach (var question in this.task.Questions)
+            {
+                foreach (var answer in question.Answers)
+                {
+                    answer.IsSelected = false;
+                    answer.IsNeedToHightlight = false;
+                    answer.IsEnabled = true;
+                }
+            }
+            this.DataContext = this.task;
+
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -39,7 +57,6 @@ namespace TempusVelit.Pages
             UpdateTimerText();
 
             timer.Start();
-
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -59,7 +76,10 @@ namespace TempusVelit.Pages
 
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
-            this.NavigationService.Navigate(new ControlRoom());
+            if (new DialogWindow(new Message("Счет будет сброшен, вы уверены?", "НЕТ", "ОК")).ShowDialog() == true)
+            {
+                this.NavigationService.Navigate(new ControlRoom());
+            }
         }
 
         private void ListViewPreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -79,7 +99,76 @@ namespace TempusVelit.Pages
 
         private void OpenPanel(object sender, MouseButtonEventArgs e)
         {
-                      //TODO
+            timer.Stop();
+
+
+            int correctCount = 0;
+
+            foreach (var question in this.task.Questions.Where(q => q.StageID == 1).ToList())
+            {
+                bool isQuestionCorrect = true;
+
+                if(question.Answers.Count == 0)
+                {
+                    isQuestionCorrect = false;
+                }
+
+                foreach (var answer in question.Answers)
+                {
+                    if (answer.IsSelected)
+                    {
+                        if (answer.IsCorrect != true)
+                        {
+                            isQuestionCorrect = false;
+                        }
+                        answer.IsNeedToHightlight = true;
+                        answer.IsSelected = false;
+                    }
+                    else
+                    {
+                        if (answer.IsCorrect == true)
+                        {
+                            isQuestionCorrect = false;
+                        }
+                    }
+                    answer.IsEnabled = false;
+                }
+                if (isQuestionCorrect)
+                {
+                    correctCount++;
+                }
+            }
+
+            tbCounter.Text = correctCount.ToString();
+
+            notDonePanel.Visibility = Visibility.Collapsed;
+            donePanel.Visibility = Visibility.Visible;
+        }
+
+        private void OpenNextStage(object sender, MouseButtonEventArgs e)
+        {
+            var record = TempusVelitData.Context.UserControlTasks.Where(uct => uct.UserID == MainPage.User.UserID
+                                                                                 && uct.TaskID == this.task.TaskID
+                                                                                 && uct.StageID == 1).FirstOrDefault();
+            if (record != null)
+            {
+                record.Score = Convert.ToInt32(tbCounter.Text);
+                record.Time = new TimeSpan(0, Convert.ToInt32(tbMin.Text), Convert.ToInt32(tbSec.Text));
+            }
+            else
+            {
+                UserControlTask userControlTask = new UserControlTask
+                {
+                    UserID = MainPage.User.UserID,
+                    TaskID = this.task.TaskID,
+                    StageID = 1,
+                    Score = Convert.ToInt32(tbCounter.Text),
+                    Time = new TimeSpan(0, Convert.ToInt32(tbMin.Text), Convert.ToInt32(tbSec.Text))
+                };
+                TempusVelitData.Context.UserControlTasks.Add(userControlTask);
+            }
+            TempusVelitData.Context.SaveChanges();
+            this.NavigationService.Navigate(new SecondStagePage(this.task));
         }
     }
 }

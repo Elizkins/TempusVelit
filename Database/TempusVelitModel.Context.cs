@@ -25,14 +25,16 @@ namespace TempusVelit.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Answer> Answer { get; set; }
-        public virtual DbSet<ControlTask> ControlTask { get; set; }
-        public virtual DbSet<LearningModule> LearningModule { get; set; }
-        public virtual DbSet<Lesson> Lesson { get; set; }
-        public virtual DbSet<Question> Question { get; set; }
-        public virtual DbSet<Stage> Stage { get; set; }
-        public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<UserControlTask> UserControlTask { get; set; }
-        public virtual DbSet<UserLesson> UserLesson { get; set; }
+        public virtual DbSet<Answer> Answers { get; set; }
+        public virtual DbSet<ControlTask> ControlTasks { get; set; }
+        public virtual DbSet<LearningModule> LearningModules { get; set; }
+        public virtual DbSet<Lesson> Lessons { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Stage> Stages { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserControlTask> UserControlTasks { get; set; }
+        public virtual DbSet<UserLesson> UserLessons { get; set; }
+        public virtual DbSet<Achievement> Achievements { get; set; }
+        public virtual DbSet<UserAchievement> UserAchievements { get; set; }
     }
 }

@@ -10,14 +10,15 @@
 namespace TempusVelit.Database
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Stage
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Stage()
         {
-            this.Question = new HashSet<Question>();
+            this.Questions = new ObservableCollection<Question>();
+            this.UserControlTasks = new ObservableCollection<UserControlTask>();
         }
     
         public int StageID { get; set; }
@@ -25,6 +26,8 @@ namespace TempusVelit.Database
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Question { get; set; }
+        public virtual ObservableCollection<Question> Questions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ObservableCollection<UserControlTask> UserControlTasks { get; set; }
     }
 }

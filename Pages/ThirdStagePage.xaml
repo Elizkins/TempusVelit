@@ -1,0 +1,270 @@
+﻿<Page x:Class="TempusVelit.Pages.ThirdStagePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TempusVelit.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="1500"
+      d:DesignWidth="1440"
+      Background="White">
+    <Page.Resources>
+        <SolidColorBrush x:Key="PanelColor">#323033</SolidColorBrush>
+    </Page.Resources>
+    <Grid Margin="50, 20, 50, 0">
+        <Border CornerRadius="16, 16, 0, 0"
+                BorderThickness="0"
+                Background="{StaticResource LightBaseColor}">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <Grid x:Name="gridMain"
+                      Margin="50, 25, 50, 25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="0"
+                            Grid.Row="0"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            PreviewMouseLeftButtonDown="GoBack">
+                        <Path Data="M11.9333 18.2868C13.4784 16.4638 15.5459 15.1593 17.8564 14.5496C20.1669 13.9398 22.6089 14.0543 24.8523 14.8774C27.0956 15.7006 29.0321 17.1928 30.3998 19.1522C31.7676 21.1116 32.5007 23.4438 32.5 25.8334C32.5 26.4965 32.7634 27.1324 33.2322 27.6012C33.7011 28.07 34.337 28.3334 35 28.3334C35.663 28.3334 36.2989 28.07 36.7678 27.6012C37.2366 27.1324 37.5 26.4965 37.5 25.8334C37.5 16.6284 30.0383 9.16676 20.8333 9.16676C18.5027 9.1639 16.1975 9.65136 14.0675 10.5975C11.9375 11.5436 10.0304 12.9272 8.47001 14.6584L7.89167 11.3834C7.84049 11.0549 7.72431 10.74 7.54992 10.4569C7.37554 10.1739 7.14646 9.92849 6.87608 9.73506C6.6057 9.54163 6.29946 9.40407 5.97527 9.33043C5.65109 9.25678 5.31547 9.24854 4.98806 9.30617C4.66065 9.36381 4.34802 9.48617 4.06847 9.66609C3.78892 9.846 3.54807 10.0799 3.35999 10.354C3.17192 10.6281 3.04041 10.937 2.97316 11.2626C2.90591 11.5882 2.90427 11.9239 2.96834 12.2501L4.70501 22.1001C4.82001 22.7518 5.18834 23.3334 5.73334 23.7134C6.40501 24.1834 7.29001 24.2884 8.04167 24.0501L17.4483 22.3901C17.7768 22.3389 18.0918 22.2227 18.3748 22.0483C18.6579 21.874 18.9033 21.6449 19.0967 21.3745C19.2901 21.1041 19.4277 20.7979 19.5013 20.4737C19.575 20.1495 19.5832 19.8139 19.5256 19.4865C19.468 19.1591 19.3456 18.8464 19.1657 18.5669C18.9858 18.2873 18.7519 18.0465 18.4778 17.8584C18.2036 17.6703 17.8947 17.5388 17.5692 17.4716C17.2436 17.4043 16.9079 17.4027 16.5817 17.4668L11.935 18.2851L11.9333 18.2868Z"
+                              Fill="{StaticResource DarkBaseColor}"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center" />
+                    </Border>
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource DarkBaseColor}"
+                               FontSize="30"
+                               FontFamily="{StaticResource YsabeauInfant-Medium}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}. {1}">
+                                <Binding Path="Lesson.OrderNumber" />
+                                <Binding Path="Lesson.LessonName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="0">
+                        <Path Data="M30.5496 32.3772C31.0077 32.3777 31.4483 32.5531 31.7813 32.8676C32.1144 33.182 32.3149 33.6118 32.3417 34.069C32.3686 34.5263 32.2198 34.9766 31.9258 35.3279C31.6318 35.6791 31.2148 35.9049 30.7599 35.959L30.5496 35.9715H17.9695C17.5114 35.971 17.0709 35.7956 16.7378 35.4812C16.4047 35.1667 16.2043 34.737 16.1774 34.2797C16.1506 33.8224 16.2994 33.3722 16.5934 33.0209C16.8874 32.6696 17.3044 32.4439 17.7592 32.3898L17.9695 32.3772H30.5496ZM31.6836 6.08116C32.101 6.49838 32.432 6.99372 32.6579 7.53891C32.8837 8.08409 33 8.66842 33 9.25854C33 9.84865 32.8837 10.433 32.6579 10.9782C32.432 11.5234 32.101 12.0187 31.6836 12.4359L12.1018 32.0178C11.8732 32.2464 11.6054 32.4321 11.311 32.5659L4.47463 35.6732C2.96142 36.3615 1.40508 34.8034 2.09339 33.2902L5.20248 26.4538C5.33575 26.1596 5.52081 25.8918 5.74882 25.663L25.3307 6.08116C26.1732 5.23887 27.3158 4.7657 28.5072 4.7657C29.6985 4.7657 30.8411 5.23887 31.6836 6.08116ZM27.8737 8.62234L8.40322 28.0892L7.3447 30.4201L9.67382 29.3598L29.1425 9.89473C29.2283 9.81184 29.2967 9.71269 29.3438 9.60306C29.3909 9.49343 29.4157 9.37552 29.4167 9.2562C29.4178 9.13689 29.3951 9.01857 29.3499 8.90813C29.3047 8.7977 29.238 8.69737 29.1536 8.613C29.0692 8.52863 28.9689 8.46191 28.8585 8.41673C28.748 8.37155 28.6297 8.34881 28.5104 8.34985C28.3911 8.35089 28.2732 8.37567 28.1635 8.42277C28.0539 8.46986 27.9548 8.53832 27.8719 8.62414M7.18655 0.0283203C7.56142 0.0284699 7.92687 0.145844 8.23172 0.364011C8.53658 0.582178 8.76558 0.890215 8.88666 1.245L9.12029 1.92432C9.38627 2.70385 9.8273 3.41208 10.4096 3.99464C10.9918 4.57721 11.6998 5.01862 12.4792 5.28502L13.1585 5.51685C13.5129 5.63829 13.8205 5.86744 14.0383 6.17226C14.256 6.47709 14.3731 6.84234 14.3731 7.21696C14.3731 7.59158 14.256 7.95684 14.0383 8.26166C13.8205 8.56649 13.5129 8.79564 13.1585 8.91708L12.4792 9.15071C11.6997 9.41668 10.9914 9.85772 10.4089 10.44C9.8263 11.0222 9.38488 11.7302 9.11849 12.5096L8.88666 13.1889C8.76522 13.5433 8.53607 13.8509 8.23125 14.0687C7.92642 14.2864 7.56117 14.4035 7.18655 14.4035C6.81193 14.4035 6.44667 14.2864 6.14185 14.0687C5.83702 13.8509 5.60787 13.5433 5.48643 13.1889L5.2528 12.5096C4.98683 11.7301 4.54579 11.0219 3.96353 10.4393C3.38128 9.85672 2.67329 9.4153 1.89391 9.14891L1.21458 8.91708C0.86019 8.79564 0.552607 8.56649 0.334838 8.26166C0.117069 7.95684 0 7.59158 0 7.21696C0 6.84234 0.117069 6.47709 0.334838 6.17226C0.552607 5.86744 0.86019 5.63829 1.21458 5.51685L1.89391 5.28322C2.67343 5.01724 3.38166 4.57621 3.96422 3.99395C4.54679 3.4117 4.98821 2.70371 5.2546 1.92432L5.48643 1.245C5.60752 0.890215 5.83652 0.582178 6.14137 0.364011C6.44622 0.145844 6.81167 0.0284699 7.18655 0.0283203ZM7.18655 5.77205C6.76142 6.30706 6.27664 6.79183 5.74163 7.21696C6.27838 7.64229 6.76002 8.12393 7.18655 8.66188C7.61187 8.12513 8.09351 7.64349 8.63146 7.21696C8.09645 6.79183 7.61168 6.30706 7.18655 5.77205Z"
+                              Fill="{StaticResource WhiteBaseColor}"
+                              HorizontalAlignment="Center" />
+                        <TextBlock Text="3 ЭТАП"
+                                   Foreground="{StaticResource WhiteBaseColor}"
+                                   FontSize="14"
+                                   FontFamily="{StaticResource Jost-SemiBold}" />
+                    </StackPanel>
+                    <TextBlock Margin="0, 10"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Grid.Row="1"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Left"
+                               Foreground="{StaticResource DarkBaseColor}"
+                               Text="{Binding ThirdStageQuestion.QuestionText}"
+                               FontSize="25"
+                               FontFamily="{StaticResource Jost-Light}" />
+                    <Border Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            CornerRadius="16"
+                            BorderThickness="0"
+                            Height="500"
+                            Margin="0,15,0,15">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding ImageSource}"
+                                        Stretch="Uniform" />
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            CornerRadius="16"
+                            BorderThickness="0"
+                            Margin="0,15,0,15"
+                            Background="{DynamicResource WhiteBaseColor}"
+                            Padding="30">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       x:Name="tbPlaceholder"
+                                       Text="Напиши свой запрос здесь..."
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       FontSize="20"
+                                       Foreground="{StaticResource LightBaseColor}"
+                                       FontFamily="{StaticResource Jost-Medium}" />
+                            <RichTextBox Background="Transparent"
+                                         x:Name="SqlEditor"
+                                         BorderThickness="0"
+                                         FontSize="20"
+                                         Foreground="{StaticResource BlackBaseColor}"
+                                         FontFamily="{StaticResource Jost-Medium}"
+                                         SelectionBrush="{StaticResource NormalBaseColor}"
+                                         TextChanged="SqlEditorTextChanged">
+                                <RichTextBox.Resources>
+                                    <Style TargetType="{x:Type Paragraph}">
+                                        <Setter Property="LineHeight"
+                                                Value="10" />
+                                        <Setter Property="Margin"
+                                                Value="0" />
+                                    </Style>
+                                </RichTextBox.Resources>
+                                <FlowDocument />
+                            </RichTextBox>
+                            <Grid Grid.Column="1"
+                                  Margin="15,0,0,0"
+                                  Background="Transparent"
+                                  PreviewMouseLeftButtonDown="CreateRequestAnswer">
+                                <Path Data="M19 35.6668C28.205 35.6668 35.6667 28.2052 35.6667 19.0002C35.6667 9.79516 28.205 2.3335 19 2.3335C9.79504 2.3335 2.33337 9.79516 2.33337 19.0002C2.33337 28.2052 9.79504 35.6668 19 35.6668Z"
+                                      Stroke="{DynamicResource PanelColor}"
+                                      StrokeThickness="3" />
+                                <Path Data="M15.6667 13.2268L25.6667 19.0002L15.6667 24.7735V13.2268Z"
+                                      StrokeLineJoin="Round"
+                                      Stroke="{DynamicResource PanelColor}"
+                                      StrokeThickness="3" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               x:Name="tbErrors"
+                               FontSize="15"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis"
+                               FontFamily="{StaticResource Jost-Light}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource ErrorColor}"
+                               Margin="20, 5">
+                    </TextBlock>
+                    <Grid Grid.Row="5"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="3"
+                          Visibility="Collapsed"
+                          x:Name="gridBoom">
+                        <DataGrid x:Name="dataGrid"
+                                  Style="{DynamicResource DataGridMainStyle}"
+                                  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="FirstName"
+                                                    Binding="{Binding FirstName}" />
+                                <DataGridTextColumn Header="LastName"
+                                                    Binding="{Binding LastName}" />
+                                <DataGridTextColumn Header="DepartmentName"
+                                                    Binding="{Binding DepartmentName}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel HorizontalAlignment="Right"
+                                    Margin="15,30,30,15"
+                                    Background="{DynamicResource WhiteBaseColor}">
+                            <Grid Margin="0,0,0,11"
+                                  Background="Transparent">
+                                <Path Data="M29.8731 5.12416C28.2495 3.4974 26.3207 2.20733 24.1972 1.32798C22.0738 0.448642 19.7976 -0.00265023 17.4993 1.17077e-05C7.83465 1.17077e-05 0 7.83498 0 17.5C0 22.3325 1.95976 26.7086 5.12686 29.8758C6.75046 31.5026 8.67933 32.7927 10.8028 33.672C12.9262 34.5514 15.2024 35.0026 17.5007 35C27.1654 35 35 27.165 35 17.5C35 12.6675 33.0402 8.2914 29.8731 5.12416ZM27.6247 27.62C26.2961 28.9508 24.7179 30.0063 22.9807 30.7259C21.2434 31.4456 19.3812 31.8153 17.5007 31.8138C9.59318 31.8138 3.18314 25.4035 3.18314 17.4956C3.18166 15.6151 3.55134 13.7528 4.27097 12.0155C4.9906 10.2781 6.04604 8.6999 7.37679 7.37127C8.70519 6.04064 10.2831 4.98526 12.0201 4.2656C13.7571 3.54595 15.6191 3.17617 17.4993 3.17745C25.4054 3.17745 31.8154 9.58775 31.8154 17.4942C31.8167 19.3744 31.4469 21.2365 30.7273 22.9735C30.0077 24.7106 28.9523 26.2886 27.6218 27.6171L27.6247 27.62Z"
+                                      Fill="{DynamicResource NormalBaseColor}" />
+                                <Path Data="M19.7492 17.5015L25.3704 11.8801C25.6476 11.5778 25.7975 11.1801 25.7886 10.7701C25.7797 10.36 25.6128 9.96919 25.3227 9.67924C25.0325 9.3893 24.6416 9.22262 24.2316 9.21399C23.8215 9.20537 23.424 9.35546 23.1219 9.63295L23.1234 9.63149L17.5022 15.2529L11.881 9.63149C11.5788 9.3542 11.1811 9.20436 10.7711 9.21325C10.361 9.22215 9.97022 9.38908 9.68029 9.67921C9.39036 9.96934 9.22369 10.3602 9.21506 10.7703C9.20644 11.1804 9.35653 11.578 9.634 11.8801L9.63255 11.8786L15.2537 17.5L9.63255 23.1214C9.47439 23.2665 9.34723 23.4421 9.25872 23.6377C9.17022 23.8332 9.12219 24.0446 9.11754 24.2592C9.11289 24.4738 9.1517 24.6871 9.23165 24.8863C9.3116 25.0855 9.43103 25.2664 9.58275 25.4183C9.73446 25.5701 9.91533 25.6896 10.1145 25.7697C10.3136 25.8498 10.5269 25.8888 10.7415 25.8843C10.956 25.8797 11.1675 25.8318 11.3631 25.7435C11.5587 25.6551 11.7344 25.528 11.8796 25.37L17.5022 19.7471L23.1234 25.3685C23.2685 25.5267 23.4441 25.6538 23.6396 25.7423C23.8351 25.8309 24.0465 25.8789 24.2611 25.8835C24.4757 25.8882 24.689 25.8494 24.8882 25.7694C25.0874 25.6895 25.2683 25.57 25.4201 25.4183C25.572 25.2666 25.6915 25.0857 25.7716 24.8866C25.8517 24.6874 25.8906 24.4741 25.8861 24.2595C25.8816 24.045 25.8337 23.8335 25.7453 23.6379C25.6569 23.4423 25.5299 23.2666 25.3718 23.1214L19.7492 17.5015Z"
+                                      Fill="{DynamicResource NormalBaseColor}" />
+                            </Grid>
+                            <Rectangle Height="3"
+                                       Fill="{DynamicResource LightBaseColor}" />
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Row="6"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3">
+                        <Grid x:Name="notDonePanel"
+                              Margin="0, 20, 0, 20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="ЗАТРАЧЕННОЕ ВРЕМЯ"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="0, 0, 20, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock x:Name="tbMin"
+                                               Text="00"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                                <TextBlock Text=":"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{StaticResource DarkBaseColor}"
+                                           FontSize="26"
+                                           FontFamily="{StaticResource YsabeauInfant-Bold}"
+                                           Margin="7, 0" />
+                                <Border Background="{StaticResource LightBaseColor}"
+                                        CornerRadius="10"
+                                        Height="35"
+                                        Width="40">
+                                    <TextBlock x:Name="tbSec"
+                                               Text="00"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource DarkBaseColor}"
+                                               FontSize="26"
+                                               FontFamily="{StaticResource YsabeauInfant-Bold}" />
+                                </Border>
+                            </StackPanel>
+                            <Border x:Name="btnResult"
+                                    Grid.Column="2"
+                                    Visibility="Hidden"
+                                    HorizontalAlignment="Right"
+                                    BorderThickness="3"
+                                    BorderBrush="{StaticResource LightBaseColor}"
+                                    Height="70"
+                                    CornerRadius="16"
+                                    Background="Transparent"
+                                    PreviewMouseLeftButtonDown="OpenResultPage">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="Black"
+                                                      BlurRadius="10"
+                                                      Opacity="0.25"
+                                                      Direction="310" />
+                                </Border.Effect>
+                                <Border Background="{DynamicResource WhiteBaseColor}"
+                                        CornerRadius="14"
+                                        Padding="15,0">
+                                    <Label Content="Результаты теста"
+                                           Foreground="{StaticResource NormalBaseColor}"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           FontSize="30"
+                                           FontFamily="{DynamicResource YsabeauInfant-Medium}" />
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

@@ -10,16 +10,19 @@
 namespace TempusVelit.Database
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class UserControlTask
     {
         public int UserControlTaskID { get; set; }
         public int UserID { get; set; }
         public int TaskID { get; set; }
+        public int StageID { get; set; }
         public Nullable<int> Score { get; set; }
+        public Nullable<System.TimeSpan> Time { get; set; }
     
         public virtual ControlTask ControlTask { get; set; }
+        public virtual Stage Stage { get; set; }
         public virtual User User { get; set; }
     }
 }

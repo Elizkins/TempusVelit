@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using TempusVelit.Assets;
 using TempusVelit.Database;
 
 namespace TempusVelit.Pages
@@ -29,19 +30,49 @@ namespace TempusVelit.Pages
         private List<string> tableHtmls = new List<string>();
         private List<Grid> buttons = new List<Grid>();
         private readonly Lesson lesson;
+        private readonly bool isFromAdmin;
+        private UserLesson userLesson;
 
         public LessonPage(Lesson lesson)
         {
             InitializeComponent();
             this.DataContext = lesson;
 
+            if (TempusVelitData.Context.UserLessons.FirstOrDefault(us => us.UserID == MainPage.User.UserID && us.LessonID == lesson.LessonID) == null)
+            {
+                userLesson = new UserLesson
+                {
+                    UserID = MainPage.User.UserID,
+                    LessonID = lesson.LessonID,
+                    IsCompleted = false,
+                };
+                TempusVelitData.Context.UserLessons.Add(userLesson);
+                TempusVelitData.Context.SaveChanges();
+            }
+            else
+            {
+                userLesson = TempusVelitData.Context.UserLessons.FirstOrDefault(us => us.UserID == MainPage.User.UserID && us.LessonID == lesson.LessonID);
+            }
+
             FillStackPanel(lesson.Content);
             this.lesson = lesson;
+        }
+
+        public LessonPage(Lesson lesson, bool isFromAdmin)
+        {
+            InitializeComponent();
+            this.isFromAdmin = isFromAdmin;
+            this.lesson = lesson;
+
+            this.DataContext = lesson;
+
+            FillStackPanel(lesson.Content);
         }
 
         private void FillStackPanel(string lesson)
         {
             int pos = 0;
+            lesson = lesson?.Replace("\n", "").Replace("\r", "");
             while (lesson != null && pos < lesson.Length)
             {
                 if (lesson[pos] == '<')
@@ -86,6 +117,10 @@ namespace TempusVelit.Pages
 
                     pos = contentEnd + closingTag.Length;
                 }
+            }
+            if (isFromAdmin)
+            {
+                return;
             }
             spContent.Children.Add(CreateCloseButton());
         }
@@ -140,13 +175,25 @@ namespace TempusVelit.Pages
 
         private void OpenNextLesson(object sender, MouseButtonEventArgs e)
         {
-            var lesson = TempusVelitData.Context.Lesson.Where(l => this.lesson.ModuleID == l.ModuleID && l.OrderNumber == this.lesson.OrderNumber + 1).First();
-            this.NavigationService.Navigate(new LessonPage(lesson));
+
+            if (TempusVelitData.Context.Lessons.Where(l => this.lesson.ModuleID == l.ModuleID && l.OrderNumber == this.lesson.OrderNumber + 1).FirstOrDefault() != null)
+            {
+                var lesson = TempusVelitData.Context.Lessons.Where(l => this.lesson.ModuleID == l.ModuleID && l.OrderNumber == this.lesson.OrderNumber + 1).FirstOrDefault();
+                this.NavigationService.Navigate(new LessonPage(lesson));
+            }
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
-            this.NavigationService.GoBack();
+            if (isFromAdmin)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                this.NavigationService.Navigate(new LearningModules());
+
+            }
         }
 
         private TextBlock CreateH1(String text)
@@ -293,6 +340,7 @@ namespace TempusVelit.Pages
 
         private void CreateTableView(object sender, MouseButtonEventArgs e)
         {
+
             int buttonIndex = buttons.IndexOf(sender as Grid);
 
             Grid mainGrid = new Grid();
@@ -367,6 +415,23 @@ namespace TempusVelit.Pages
             int borderIndex = spContent.Children.IndexOf(border);
             spContent.Children.Insert(borderIndex + 1, mainGrid);
             //spContent.Children.Add(mainGrid);
+
+            if (isFromAdmin)
+            {
+                return;
+            }
+            if (!MainPage.User.UserAchievements.Any(ua => ua.AchievementID == 10))
+            {
+                TempusVelitData.Context.UserAchievements.Add(new UserAchievement
+                {
+                    UserID = MainPage.User.UserID,
+                    AchievementID = 10
+                });
+
+                MainPage.User.PointCount += 50;
+                TempusVelitData.Context.SaveChanges();
+                new DialogWindow(new Message("Вы получили достижение", "", "ОК")).ShowDialog();
+            }
         }
 
         private void DataGridPreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -388,6 +453,105 @@ namespace TempusVelit.Pages
         {
             var tablePanel = ((sender as Grid).Parent as StackPanel).Parent as Grid;
             spContent.Children.Remove(tablePanel);
+        }
+
+        private void GetPageEnd(object sender, ScrollChangedEventArgs e)
+        {
+            if (isFromAdmin)
+            {
+                return;
+            }
+
+            var scrollViewer = (ScrollViewer)sender;
+
+            if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight - 1)
+            {
+                var controlTask = TempusVelitData.Context.ControlTasks.FirstOrDefault(ct => ct.LessonID == lesson.LessonID);
+
+                if (controlTask != null)
+                {
+                    int taskId = controlTask.TaskID;
+
+                    var tasksToAdd = new List<UserControlTask>();
+
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        bool exists = TempusVelitData.Context.UserControlTasks
+                            .Any(uct => uct.UserID == MainPage.User.UserID
+                                     && uct.TaskID == taskId
+                                     && uct.StageID == i);
+
+                        if (!exists)
+                        {
+                            tasksToAdd.Add(new UserControlTask()
+                            {
+                                UserID = MainPage.User.UserID,
+                                TaskID = taskId,
+                                StageID = i,
+                            });
+                        }
+                    }
+                    if (tasksToAdd.Any())
+                    {
+                        TempusVelitData.Context.UserControlTasks.AddRange(tasksToAdd);
+                    }
+                }
+                userLesson.IsCompleted = true;
+                userLesson.CompletedDate = DateTime.Now;
+
+                MainPage.User.PointCount += 10;
+
+                TempusVelitData.Context.SaveChanges();
+
+                int moduleId = lesson.ModuleID;
+                var module = TempusVelitData.Context.LearningModules.Find(moduleId);
+
+                if (module != null &&
+                    MainPage.User.UserLessons.Count(ul => ul.Lesson.ModuleID == moduleId) == module.Lessons.Count)
+                {
+                    var moduleAchievements = new Dictionary<int, int>
+                    {
+                        { 1, 6 },  // Module 1 -> Achievement 6
+                        { 2, 8 },  // Module 2 -> Achievement 8
+                        { 3, 7 }   // Module 3 -> Achievement 7
+                    };
+
+                    if (moduleAchievements.TryGetValue(moduleId, out int achievementId))
+                    {
+                        if (!MainPage.User.UserAchievements.Any(ua => ua.AchievementID == achievementId))
+                        {
+                            TempusVelitData.Context.UserAchievements.Add(new UserAchievement()
+                            {
+                                UserID = MainPage.User.UserID,
+                                AchievementID = achievementId,
+                            });
+
+                            MainPage.User.PointCount += 50;
+                        }
+                    }
+
+                    var allModules = TempusVelitData.Context.LearningModules.ToList();
+                    bool allModulesCompleted = allModules.All(m =>
+                        MainPage.User.UserLessons.Count(ul => ul.Lesson.ModuleID == m.ModuleID) == m.Lessons.Count);
+
+                    if (allModulesCompleted &&
+                        !MainPage.User.UserAchievements.Any(ua => ua.AchievementID == 9))
+                    {
+                        TempusVelitData.Context.UserAchievements.Add(new UserAchievement
+                        {
+                            UserID = MainPage.User.UserID,
+                            AchievementID = 9
+                        });
+
+                        MainPage.User.PointCount += 50;
+                        TempusVelitData.Context.SaveChanges();
+
+                        new DialogWindow(new Message("Вы получили достижение", "", "ОК")).ShowDialog();
+                    }
+
+                    
+                }
+            }
         }
     }
 }

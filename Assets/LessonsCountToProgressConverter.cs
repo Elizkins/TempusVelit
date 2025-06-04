@@ -20,7 +20,7 @@ namespace TempusVelit.Assets
             if (value is ICollection<Lesson> lessons)
             {
                 int moduleId = lessons.ToList()[0].ModuleID;
-                var userLessonsCount = MainPage.User.UserLesson.Where(ul => ul.IsCompleted == true && ul.Lesson.ModuleID == moduleId).Count();
+                var userLessonsCount = MainPage.User.UserLessons.Where(ul => ul.IsCompleted == true && ul.Lesson.ModuleID == moduleId).Count();
                 int result = (int)((Double)userLessonsCount / (Double)lessons.Count * 100);
                 return result;
             }

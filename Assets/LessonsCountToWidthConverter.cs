@@ -21,7 +21,7 @@ namespace TempusVelit.Assets
                 return 0;
 
             int moduleId = lessons.First().ModuleID;
-            var completedCount = MainPage.User.UserLesson
+            var completedCount = MainPage.User.UserLessons
                 .Count(ul => ul.IsCompleted == true && ul.Lesson.ModuleID == moduleId);
 
             double progress = (double)completedCount / lessons.Count;

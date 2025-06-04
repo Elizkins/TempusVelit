@@ -69,12 +69,48 @@ namespace TempusVelit.Assets
             }
         }
 
+        public int CaretIndex
+        {
+            get
+            {
+                return entry.CaretIndex;
+            }
+            set
+            {
+                entry.CaretIndex = value;
+            }
+        }
+
+        public int SelectionStart
+        {
+            get
+            {
+                return entry.SelectionStart;
+            }
+            set
+            {
+                entry.SelectionStart = value;
+            }
+        }
+
+        public int SelectionLength
+        {
+            get
+            {
+                return entry.SelectionLength;
+            }
+            set
+            {
+                entry.SelectionLength = value;
+            }
+        }
+
+        public event EventHandler TextChanged;
+
 
         public TextBoxWithPlaceholder()
         {
             InitializeComponent();
-
-            this.DataContext = this;
         }
 
 
@@ -95,6 +131,15 @@ namespace TempusVelit.Assets
         private void RemovePlaceholderMB(object sender, MouseButtonEventArgs e)
         {
             entry.Focus();
+        }
+
+        private void EntryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if ((e.Source as TextBox).Text.Length != 0)
+            {
+                RemovePlaceholder(sender, e);
+            }
+            TextChanged?.Invoke(sender, e);
         }
     }
 }

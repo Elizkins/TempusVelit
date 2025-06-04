@@ -256,6 +256,8 @@
                     <Style TargetType="Border">
                         <Setter Property="Background"
                                 Value="{StaticResource DarkBaseColor}" />
+                        <Setter Property="IsEnabled"
+                                Value="False" />
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
@@ -266,6 +268,8 @@
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="Background"
                                         Value="{StaticResource NormalBaseColor}" />
+                                <Setter Property="IsEnabled"
+                                        Value="True" />
                             </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -342,7 +346,7 @@
             </StackPanel>
             <Label Content="TEMPUS VELIT"
                    HorizontalContentAlignment="Center"
-                   Margin="0, 60"
+                   Margin="0, 52, 0, 60"
                    FontSize="40"
                    FontFamily="{StaticResource Jost-SemiBold}"
                    Foreground="{StaticResource LightBaseColor}" />

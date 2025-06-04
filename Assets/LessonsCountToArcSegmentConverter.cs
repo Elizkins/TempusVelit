@@ -17,7 +17,7 @@ namespace TempusVelit.Assets
         {
             if (value is List<Lesson> lessons)
             {
-                var userLessonsCount = MainPage.User.UserLesson.Count(ul => ul.IsCompleted == true);
+                var userLessonsCount = MainPage.User.UserLessons.Count(ul => ul.IsCompleted == true);
                 int result = userLessonsCount * 100 / lessons.Count;
 
                 var paths = new[]

@@ -14,7 +14,8 @@
             Background="{StaticResource LightBaseColor}"
             Margin="50">
         <ScrollViewer VerticalScrollBarVisibility="Hidden"
-                      Padding="50, 25">
+                      Padding="50, 25"
+                      ScrollChanged="GetPageEnd">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

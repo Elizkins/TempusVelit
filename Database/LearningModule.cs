@@ -10,14 +10,14 @@
 namespace TempusVelit.Database
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class LearningModule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LearningModule()
         {
-            this.Lesson = new HashSet<Lesson>();
+            this.Lessons = new ObservableCollection<Lesson>();
         }
     
         public int ModuleID { get; set; }
@@ -25,6 +25,6 @@ namespace TempusVelit.Database
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lesson> Lesson { get; set; }
+        public virtual ObservableCollection<Lesson> Lessons { get; set; }
     }
 }

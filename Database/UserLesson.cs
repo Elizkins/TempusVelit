@@ -10,7 +10,7 @@
 namespace TempusVelit.Database
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class UserLesson
     {
@@ -18,6 +18,7 @@ namespace TempusVelit.Database
         public int UserID { get; set; }
         public int LessonID { get; set; }
         public Nullable<bool> IsCompleted { get; set; }
+        public Nullable<System.DateTime> CompletedDate { get; set; }
     
         public virtual Lesson Lesson { get; set; }
         public virtual User User { get; set; }

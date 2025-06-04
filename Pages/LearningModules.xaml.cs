@@ -26,9 +26,9 @@ namespace TempusVelit.Pages
         {
             InitializeComponent();
 
-            progressBar.DataContext = TempusVelitData.Context.Lesson.ToList();
-            lvModules.ItemsSource = TempusVelitData.Context.LearningModule.ToList();
-            lvModuleProgress.ItemsSource = TempusVelitData.Context.LearningModule.ToList();
+            progressBar.DataContext = TempusVelitData.Context.Lessons.ToList();
+            lvModules.ItemsSource = TempusVelitData.Context.LearningModules.ToList();
+            lvModuleProgress.ItemsSource = TempusVelitData.Context.LearningModules.ToList();
         }
 
         private void ListViewPreviewMouseWheel(object sender, MouseWheelEventArgs e)

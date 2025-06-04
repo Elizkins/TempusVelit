@@ -31,7 +31,7 @@ namespace TempusVelit
 
             MainNavigationService = NavigationService;
 
-            User user = TempusVelitData.Context.User.Where(u => u.Email == Settings.Default.Email && u.PasswordHash == Settings.Default.Password).FirstOrDefault();
+            User user = TempusVelitData.Context.Users.Where(u => u.Email == Settings.Default.Email && u.PasswordHash == Settings.Default.Password).FirstOrDefault();
             if (user != null)
             {
                 this.NavigationService.Navigate(new MainPage(user));
